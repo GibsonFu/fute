@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fute (Flupenthixol) 安平靜 — 醫療推廣學習平台</title>
+<style>
+:root{--primary:#1a5276;--secondary:#2e86c1;--accent:#1abc9c;--warn:#e67e22;--danger:#e74c3c;--light:#eaf4fb;--dark:#1c2833;--gray:#f2f3f4;--border:#d5dbdb;--text:#2c3e50;--muted:#7f8c8d;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI','Microsoft JhengHei',sans-serif;color:var(--text);background:#f0f4f8;line-height:1.7;}
+
+/* ── HEADER ── */
+.site-header{background:linear-gradient(135deg,var(--primary) 0%,#154360 100%);color:#fff;padding:16px 24px 0;position:sticky;top:0;z-index:999;box-shadow:0 2px 16px rgba(0,0,0,.3);}
+.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.logo{font-size:1.4rem;font-weight:700;letter-spacing:1px;}
+.logo span{color:var(--accent);}
+.header-badges{display:flex;gap:8px;flex-wrap:wrap;}
+.hbadge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);padding:3px 10px;border-radius:12px;font-size:.75rem;}
+
+/* ── TABS NAV ── */
+.tabs-nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;padding-bottom:0;}
+.tabs-nav::-webkit-scrollbar{display:none;}
+.tab-btn{
+  flex-shrink:0;padding:10px 18px;cursor:pointer;border:none;
+  background:rgba(255,255,255,.1);color:rgba(255,255,255,.75);
+  font-size:.84rem;font-family:inherit;border-radius:8px 8px 0 0;
+  transition:all .2s;white-space:nowrap;border-bottom:3px solid transparent;
+}
+.tab-btn:hover{background:rgba(255,255,255,.2);color:#fff;}
+.tab-btn.active{background:#fff;color:var(--primary);font-weight:700;border-bottom:3px solid var(--accent);}
+.tab-btn .tab-icon{margin-right:5px;}
+
+/* ── CONTENT PANELS ── */
+.panel{display:none;max-width:1080px;margin:0 auto;padding:28px 20px 48px;}
+.panel.active{display:block;}
+
+/* ── HERO (overview panel top) ── */
+.hero-mini{background:linear-gradient(135deg,var(--primary),#154360);color:#fff;border-radius:12px;padding:28px 32px;margin-bottom:24px;}
+.hero-mini h2{font-size:1.8rem;margin-bottom:6px;}
+.hero-mini h2 span{color:var(--accent);}
+.hero-mini p{opacity:.85;font-size:.95rem;}
+
+/* ── CARDS ── */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-bottom:22px;}
+.card{background:#fff;border-radius:10px;padding:22px;box-shadow:0 2px 10px rgba(0,0,0,.07);border-left:5px solid var(--secondary);transition:transform .2s,box-shadow .2s;}
+.card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.11);}
+.card.accent{border-left-color:var(--accent);}
+.card.warn{border-left-color:var(--warn);}
+.card.danger{border-left-color:var(--danger);}
+.card h3{color:var(--primary);margin-bottom:10px;font-size:1.05rem;}
+.card ul{padding-left:17px;}
+.card ul li{margin-bottom:5px;font-size:.88rem;}
+
+/* ── SECTION TITLES ── */
+h2.stitle{font-size:1.5rem;color:var(--primary);border-bottom:3px solid var(--accent);display:inline-block;padding-bottom:8px;margin-bottom:6px;}
+.sdesc{color:var(--muted);margin-bottom:22px;font-size:.92rem;}
+
+/* ── SUB-TABS (inner tabs) ── */
+.inner-tabs{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:22px;overflow-x:auto;}
+.inner-tab-btn{padding:9px 22px;cursor:pointer;border:none;background:none;font-size:.9rem;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-2px;font-family:inherit;transition:all .2s;white-space:nowrap;}
+.inner-tab-btn.active{color:var(--primary);border-bottom-color:var(--primary);font-weight:600;}
+.inner-content{display:none;}
+.inner-content.active{display:block;}
+
+/* ── TABLES ── */
+.table-wrap{overflow-x:auto;margin:16px 0;}
+table{width:100%;border-collapse:collapse;font-size:.86rem;}
+th{background:var(--primary);color:#fff;padding:9px 12px;text-align:left;}
+td{padding:8px 12px;border-bottom:1px solid var(--border);}
+tr:nth-child(even) td{background:var(--gray);}
+tr:hover td{background:var(--light);}
+.check{color:var(--accent);font-weight:bold;}
+.cross{color:var(--danger);}
+.partial{color:var(--warn);}
+.row-hl td{background:#d5f5e3!important;font-weight:600;}
+
+/* ── INFO BOXES ── */
+.info-box{background:var(--light);border-left:4px solid var(--secondary);padding:13px 16px;border-radius:0 8px 8px 0;margin:14px 0;font-size:.89rem;}
+.warn-box{background:#fef9e7;border-left:4px solid var(--warn);padding:13px 16px;border-radius:0 8px 8px 0;margin:14px 0;font-size:.89rem;}
+.danger-box{background:#fdedec;border-left:4px solid var(--danger);padding:13px 16px;border-radius:0 8px 8px 0;margin:14px 0;font-size:.89rem;}
+.info-box strong,.warn-box strong,.danger-box strong{display:block;margin-bottom:4px;}
+.ref{font-size:.76rem;color:var(--muted);font-style:italic;margin-top:6px;}
+
+/* ── MECHANISM GRID ── */
+.mech-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:18px 0;}
+.mech-item{background:#fff;border-radius:10px;padding:16px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.07);}
+.mech-item .icon{font-size:1.8rem;margin-bottom:7px;}
+.mech-item h4{color:var(--primary);font-size:.9rem;margin-bottom:5px;}
+.mech-item p{font-size:.8rem;color:var(--muted);}
+
+/* ── DOSING FLOW ── */
+.dosing-flow{display:flex;flex-direction:column;gap:0;margin:16px 0;}
+.dosing-step{display:flex;align-items:flex-start;gap:16px;padding:13px 0 13px 22px;border-left:3px solid var(--accent);position:relative;}
+.dosing-step::before{content:attr(data-step);position:absolute;left:-13px;background:var(--accent);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:bold;}
+.dosing-step h4{color:var(--primary);margin-bottom:3px;font-size:.92rem;}
+.dosing-step p{font-size:.86rem;}
+
+/* ── Q&A ── */
+.search-bar{width:100%;padding:9px 14px;border:2px solid var(--border);border-radius:8px;font-size:.92rem;margin-bottom:14px;font-family:inherit;transition:border-color .2s;}
+.search-bar:focus{outline:none;border-color:var(--secondary);}
+.qa-categories{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px;}
+.cat-btn{padding:5px 14px;border-radius:16px;border:2px solid var(--secondary);background:none;cursor:pointer;font-size:.82rem;color:var(--secondary);font-family:inherit;transition:all .2s;}
+.cat-btn.active,.cat-btn:hover{background:var(--secondary);color:#fff;}
+.qa-list{display:flex;flex-direction:column;gap:10px;}
+.qa-item{background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.07);}
+.qa-question{padding:13px 16px;cursor:pointer;font-weight:600;font-size:.9rem;display:flex;justify-content:space-between;align-items:center;color:var(--primary);user-select:none;}
+.qa-question:hover{background:var(--light);}
+.qa-arrow{font-size:1rem;transition:transform .25s;color:var(--secondary);}
+.qa-answer{display:none;padding:12px 16px 14px;font-size:.87rem;border-top:1px solid var(--border);}
+.qa-answer.show{display:block;}
+.qa-item.open .qa-arrow{transform:rotate(180deg);}
+
+/* ── QUIZ ── */
+.quiz-card{background:#fff;border-radius:10px;padding:22px;box-shadow:0 2px 10px rgba(0,0,0,.07);margin-bottom:14px;}
+.quiz-options{display:flex;flex-direction:column;gap:8px;margin:13px 0;}
+.quiz-opt{padding:9px 14px;border:2px solid var(--border);border-radius:8px;cursor:pointer;font-family:inherit;font-size:.88rem;text-align:left;background:#fff;transition:all .2s;}
+.quiz-opt:hover{border-color:var(--secondary);background:var(--light);}
+.quiz-opt.correct{border-color:var(--accent);background:#d5f5e3;}
+.quiz-opt.wrong{border-color:var(--danger);background:#fdedec;}
+.quiz-exp{display:none;margin-top:11px;font-size:.86rem;}
+.quiz-exp.show{display:block;}
+.progress-bar{background:var(--border);border-radius:10px;height:7px;margin:6px 0;}
+.progress-fill{height:100%;border-radius:10px;background:var(--accent);}
+
+/* ── REFS ── */
+.ref-list{list-style:none;counter-reset:ref;}
+.ref-list li{counter-increment:ref;padding:5px 0 5px 30px;font-size:.83rem;color:var(--muted);position:relative;border-bottom:1px solid var(--gray);}
+.ref-list li::before{content:"["counter(ref)"]";position:absolute;left:0;color:var(--secondary);font-weight:600;}
+
+/* ── BUTTONS ── */
+.btn{padding:8px 18px;border-radius:7px;border:none;cursor:pointer;font-family:inherit;font-size:.88rem;font-weight:600;transition:all .2s;}
+.btn-primary{background:var(--primary);color:#fff;}
+.btn-primary:hover{background:var(--secondary);}
+.btn-secondary{background:var(--gray);color:var(--text);}
+
+/* ── STAT BOXES ── */
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:18px 0;}
+.stat-box{background:#fff;border-radius:10px;padding:16px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.07);}
+.stat-num{font-size:1.6rem;font-weight:700;color:var(--primary);}
+.stat-label{font-size:.78rem;color:var(--muted);margin-top:2px;}
+
+/* ── FOOTER ── */
+footer{background:var(--dark);color:#aaa;text-align:center;padding:22px;font-size:.8rem;line-height:1.9;}
+footer strong{color:#fff;}
+
+/* ── MOBILE ── */
+@media(max-width:640px){
+  .header-badges{display:none;}
+  .tab-btn{padding:8px 12px;font-size:.78rem;}
+  .panel{padding:18px 12px 40px;}
+  .card-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ SITE HEADER + TABS NAV ══ -->
+<header class="site-header">
+  <div class="header-top">
+    <div class="logo">Fu<span>te</span> 安平靜 <span style="font-size:.85rem;font-weight:400;opacity:.7">Flupenthixol｜東竹藥品</span></div>
+    <div class="header-badges">
+      <span class="hbadge">🧠 D1/D2 拮抗</span>
+      <span class="hbadge">💊 0.5mg / 5mg</span>
+      <span class="hbadge">📚 24 篇文獻</span>
+      <span class="hbadge">❓ 互動 Q&amp;A</span>
+    </div>
+  </div>
+  <nav class="tabs-nav" id="mainTabs">
+    <button class="tab-btn active" onclick="showPanel('overview',this)"><span class="tab-icon">🔵</span>產品總覽</button>
+    <button class="tab-btn" onclick="showPanel('pharmacology',this)"><span class="tab-icon">🧪</span>藥理機轉</button>
+    <button class="tab-btn" onclick="showPanel('indications',this)"><span class="tab-icon">📋</span>適應症</button>
+    <button class="tab-btn" onclick="showPanel('dosing',this)"><span class="tab-icon">💊</span>劑量指引</button>
+    <button class="tab-btn" onclick="showPanel('comparison',this)"><span class="tab-icon">⚖️</span>藥物比較</button>
+    <button class="tab-btn" onclick="showPanel('special',this)"><span class="tab-icon">🔬</span>特殊應用</button>
+    <button class="tab-btn" onclick="showPanel('safety',this)"><span class="tab-icon">⚠️</span>安全性</button>
+    <button class="tab-btn" onclick="showPanel('qa',this)"><span class="tab-icon">❓</span>Q&amp;A 模擬</button>
+    <button class="tab-btn" onclick="showPanel('quiz',this)"><span class="tab-icon">📝</span>自我測驗</button>
+    <button class="tab-btn" onclick="showPanel('promo',this)"><span class="tab-icon">🎯</span>推廣話術</button>
+    <button class="tab-btn" onclick="showPanel('references',this)"><span class="tab-icon">📚</span>參考文獻</button>
+  </nav>
+</header>
+
+<!-- ══════════════════════════════════════
+     PANEL 1 — 產品總覽
+══════════════════════════════════════ -->
+<div class="panel active" id="panel-overview">
+  <div class="hero-mini">
+    <h2>Fute <span>(Flupenthixol)</span> 安平靜</h2>
+    <p>Thioxanthene 類抗精神病藥物｜衛署藥製字第 049577 號（0.5mg）｜東竹藥品工業股份有限公司</p>
+    <p style="margin-top:6px;opacity:.7;font-size:.85rem;">本平台供醫療專業人員教育學習使用，所有醫療決策應依個別患者狀況由專科醫師判斷</p>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-num">1965</div><div class="stat-label">Lundbeck 合成年份</div></div>
+    <div class="stat-box"><div class="stat-num">0.35 nM</div><div class="stat-label">D2 Ki（最強親和力）</div></div>
+    <div class="stat-box"><div class="stat-num">35 hr</div><div class="stat-label">口服半衰期</div></div>
+    <div class="stat-box"><div class="stat-num">40–55%</div><div class="stat-label">口服生體可用率</div></div>
+    <div class="stat-box"><div class="stat-num">>99%</div><div class="stat-label">血漿蛋白結合率</div></div>
+    <div class="stat-box"><div class="stat-num">CYP2D6</div><div class="stat-label">主要代謝酵素</div></div>
+  </div>
+
+  <div class="inner-tabs">
+    <button class="inner-tab-btn active" onclick="switchInner('ov-05','overview',this)">Fute 0.5mg</button>
+    <button class="inner-tab-btn" onclick="switchInner('ov-5','overview',this)">Fute 5mg</button>
+    <button class="inner-tab-btn" onclick="switchInner('ov-pharma','overview',this)">廠商 / 法規資訊</button>
+  </div>
+
+  <div class="inner-content active" id="ov-05">
+    <div class="card-grid">
+      <div class="card accent">
+        <h3>🔵 Fute 0.5mg 基本資料</h3>
+        <ul>
+          <li><b>學名：</b>Flupenthixol dihydrochloride 0.5mg</li>
+          <li><b>劑型：</b>薄膜衣錠（紅色圓形錠）</li>
+          <li><b>許可證：</b>衛署藥製字第 049577 號</li>
+          <li><b>有效期限：</b>至 2028-08-05</li>
+          <li><b>申請商：</b>東竹藥品股份有限公司（台北市大同區）</li>
+          <li><b>製造商：</b>明德製藥股份有限公司（桃園市楊梅區）</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>📌 臨床定位</h3>
+        <ul>
+          <li>輕至中度焦慮症</li>
+          <li>憂鬱合併焦慮（混合型）</li>
+          <li>心身症之焦慮/緊張</li>
+          <li>神經衰弱（Neurasthenia）</li>
+          <li>功能性胃腸障礙伴焦慮</li>
+          <li>更年期情緒症狀</li>
+        </ul>
+      </div>
+      <div class="card warn">
+        <h3>💊 標準劑量</h3>
+        <ul>
+          <li><b>起始：</b>早晨 0.5mg</li>
+          <li><b>維持：</b>0.5–1mg/day（早晨或分早/中）</li>
+          <li><b>最大：</b>3mg/day</li>
+          <li><b>服藥時機：</b>早晨或上午，避免下午 3 點後</li>
+          <li><b>老年：</b>從 0.25mg 開始，緩慢調整</li>
+        </ul>
+      </div>
+    </div>
+    <div class="info-box">
+      <strong>⚡ 臨床特點</strong>
+      低劑量 flupenthixol 具輕微激活作用（activating effect），不造成過度嗜睡，適合日間使用。RCT 顯示療效與 lorazepam 相當，無成癮性。<br>
+      <div class="ref">Darcourt G et al. Acta Psychiatr Scand Suppl. 1995;391:52-59</div>
+    </div>
+  </div>
+
+  <div class="inner-content" id="ov-5">
+    <div class="card-grid">
+      <div class="card danger">
+        <h3>🔴 Fute 5mg 基本資料</h3>
+        <ul>
+          <li><b>學名：</b>Flupenthixol dihydrochloride 5mg</li>
+          <li><b>劑型：</b>薄膜衣錠（橘色圓形錠）</li>
+          <li><b>申請商：</b>東竹藥品股份有限公司</li>
+          <li><b>製造商：</b>明德製藥股份有限公司</li>
+          <li><b>核准適應症：</b>精神分裂症及其他精神病</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>📌 臨床定位</h3>
+        <ul>
+          <li>思覺失調症（急性 + 慢性維持）</li>
+          <li>陽性症狀：幻覺、妄想</li>
+          <li>陰性症狀：情感淡漠、社交退縮</li>
+          <li>躁鬱症躁狂相（輔助）</li>
+          <li>器質性精神病</li>
+        </ul>
+      </div>
+      <div class="card warn">
+        <h3>💊 標準劑量</h3>
+        <ul>
+          <li><b>起始：</b>5–15mg/day 分次</li>
+          <li><b>維持：</b>5–20mg/day</li>
+          <li><b>最大：</b>40mg/day（難治案例）</li>
+          <li><b>老年：</b>從 2.5mg 開始</li>
+        </ul>
+      </div>
+    </div>
+    <div class="info-box">
+      <strong>⚡ 陰性症狀特點</strong>
+      D1 受體拮抗活性為同類藥物最強（Ki = 3.5 nM），對陰性症狀改善優於 haloperidol，頭對頭 RCT 顯示對陰性症狀不劣於 risperidone。<br>
+      <div class="ref">Schröder J et al. Prog Neuropsychopharmacol Biol Psychiatry. 2007;31(2):77-86</div>
+    </div>
+  </div>
+
+  <div class="inner-content" id="ov-pharma">
+    <div class="card-grid">
+      <div class="card">
+        <h3>🏭 東竹藥品工業</h3>
+        <ul>
+          <li><b>申請商：</b>東竹藥品股份有限公司</li>
+          <li><b>製造商：</b>明德製藥股份有限公司</li>
+          <li><b>產品線：</b>精神科、神經科用藥</li>
+        </ul>
+      </div>
+      <div class="card accent">
+        <h3>🌐 全球核准狀態</h3>
+        <ul>
+          <li><b>台灣：</b>✅ 已核准（東竹藥品）</li>
+          <li><b>英國：</b>✅ Depixol®、Fluanxol®</li>
+          <li><b>澳洲/加拿大：</b>✅ 已核准</li>
+          <li><b>德國/南非/伊朗：</b>✅ 已核准</li>
+          <li><b>美國：</b>❌ 未獲 FDA 核准</li>
+          <li><b>原廠：</b>Lundbeck（丹麥）1965 年合成</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>🌍 全球品牌對照</h3>
+        <ul>
+          <li><b>Fluanxol®：</b>Lundbeck（原廠，全球）</li>
+          <li><b>Depixol®：</b>Lundbeck（英國/澳洲）</li>
+          <li><b>Fute®：</b>東竹（台灣）</li>
+          <li><b>Emergil®：</b>歐洲部分市場</li>
+          <li><b>Depot：</b>Depixol Conc.、Fluanxol Depot</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PANEL 2 — 藥理機轉
+══════════════════════════════════════ -->
+<div class="panel" id="panel-pharmacology">
+  <h2 class="stitle">藥理機轉</h2>
+  <p class="sdesc">Flupenthixol 屬 thioxanthene 衍生物，透過多受體拮抗發揮雙相藥理作用。</p>
+
+  <div class="info-box">
+    <strong>📖 歷史背景</strong>
+    1965 年由丹麥 Lundbeck 合成；decanoate depot 劑型 1967 年合成，1968 年起用於瑞典醫院。全球超過 50 國核准使用，未獲 FDA 核准於美國使用。
+    <div class="ref">Wikipedia. Flupentixol. 2024</div>
+  </div>
+
+  <div class="mech-grid">
+    <div class="mech-item"><div class="icon">🧠</div><h4>D2 拮抗（最強）</h4><p>Ki = 0.35 nM；治療劑量佔用率 50–70%；抑制中腦邊緣多巴胺，改善陽性症狀</p></div>
+    <div class="mech-item"><div class="icon">⚡</div><h4>D1 拮抗（同類最強）</h4><p>Ki = 3.5 nM；治療劑量佔用率 ~20%；改善前額葉功能不足，助陰性症狀</p></div>
+    <div class="mech-item"><div class="icon">🔬</div><h4>H₁ 拮抗</h4><p>Ki = 0.86 nM；輕度鎮靜，低劑量下鎮靜效果輕微</p></div>
+    <div class="mech-item"><div class="icon">💜</div><h4>5-HT₂A 拮抗</h4><p>Ki ~7 nM；佔用率 ~20%；輔助情緒改善，部分緩解 EPS</p></div>
+    <div class="mech-item"><div class="icon">💤</div><h4>α₁ 拮抗</h4><p>中度；姿勢性低血壓，老年患者尤需注意</p></div>
+    <div class="mech-item"><div class="icon">🔄</div><h4>低劑量雙相效應</h4><p>低劑量作用突觸前 D2 自體受體，增加前額葉多巴胺，產生激活/抗憂鬱效果</p></div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <tr><th>受體</th><th>Ki (cis-isomer)</th><th>體內佔用率</th><th>臨床效應</th></tr>
+      <tr><td>D2</td><td><b>0.35 nM</b>（最強）</td><td>50–70%</td><td>陽性症狀控制、EPS 風險</td></tr>
+      <tr><td>D1</td><td><b>3.5 nM</b>（同類最強）</td><td>~20%</td><td>陰性症狀改善、前額葉激活</td></tr>
+      <tr><td>H₁</td><td><b>0.86 nM</b></td><td>—</td><td>輕度鎮靜</td></tr>
+      <tr><td>5-HT₂A</td><td>~7 nM</td><td>~20%</td><td>情緒改善、部分 EPS 緩解</td></tr>
+      <tr><td>α₁-adrenergic</td><td>中</td><td>—</td><td>姿勢性低血壓</td></tr>
+      <tr><td>5-HT₁A</td><td>8028 nM（幾乎無）</td><td>—</td><td>—</td></tr>
+      <tr><td>Muscarinic M1</td><td>弱</td><td>—</td><td>抗膽鹼效應不顯著</td></tr>
+    </table>
+  </div>
+  <div class="ref" style="margin-bottom:16px;">體內佔用率：N=13 思覺失調症患者，5.7±1.4 mg/day。Cambridge Core: Advances in Psychiatric Treatment Part 2; Wikipedia Flupentixol</div>
+
+  <div class="info-box">
+    <strong>📊 藥動學 (Pharmacokinetics)</strong>
+    <div class="table-wrap" style="margin-top:10px;">
+      <table>
+        <tr><th>參數</th><th>數值</th><th>說明</th></tr>
+        <tr><td>口服生體可用率</td><td>40–55%</td><td>首渡效應明顯</td></tr>
+        <tr><td>Tmax</td><td>3–8 小時</td><td>口服錠劑</td></tr>
+        <tr><td>蛋白結合率</td><td>&gt;99%</td><td>主要結合 albumin</td></tr>
+        <tr><td>分布容積 (Vd)</td><td>14.1 L/kg</td><td>廣泛分布組織</td></tr>
+        <tr><td>代謝</td><td>肝臟 CYP2D6</td><td>硫氧化、N-脫甲基化</td></tr>
+        <tr><td>口服 t½</td><td>35 小時</td><td>每日一次可行</td></tr>
+        <tr><td>Depot t½</td><td>~17 天</td><td>每 2–4 週注射一次</td></tr>
+        <tr><td>排泄</td><td>糞便（主）/ 尿液</td><td>原型藥排泄少</td></tr>
+      </table>
+    </div>
+    <div class="ref">Lundbeck A/S. Fluanxol Product Monograph. 2020</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PANEL 3 — 適應症
+══════════════════════════════════════ -->
+<div class="panel" id="panel-indications">
+  <h2 class="stitle">適應症與禁忌症</h2>
+  <p class="sdesc">依劑量不同，Fute 具截然不同的臨床定位。</p>
+  <div class="card-grid">
+    <div class="card accent">
+      <h3>🔵 Fute 0.5mg 適應症</h3>
+      <ul>
+        <li>輕至中度焦慮症</li>
+        <li>憂鬱症合併焦慮（混合型）</li>
+        <li>心身症（Psychosomatic disorders）</li>
+        <li>神經衰弱（Neurasthenia）</li>
+        <li>功能性胃腸障礙伴隨焦慮</li>
+        <li>更年期情緒障礙</li>
+        <li>慢性緊張狀態</li>
+      </ul>
+    </div>
+    <div class="card danger">
+      <h3>🔴 Fute 5mg 適應症</h3>
+      <ul>
+        <li>精神分裂症（思覺失調症）急性期</li>
+        <li>精神分裂症慢性期維持治療</li>
+        <li>其他精神病（Other psychoses）</li>
+        <li>伴隨激動/攻擊行為之精神病</li>
+        <li>器質性腦病伴精神症狀</li>
+        <li>躁鬱症躁狂相（輔助）</li>
+      </ul>
+    </div>
+  </div>
+  <div class="warn-box">
+    <strong>⚠️ 禁忌症</strong>
+    • 對 thioxanthene 或 phenothiazine 類過敏<br>
+    • 昏迷或嚴重中樞抑制<br>
+    • 急性酒精/藥物中毒<br>
+    • 嗜鉻細胞瘤（Pheochromocytoma）<br>
+    • 泌乳素依賴性腫瘤<br>
+    • QTc 延長 / 遺傳性心律不整（Long QT syndrome）<br>
+    • 帕金森病、路易體失智症<br>
+    • 嚴重肝功能障礙<br>
+    • 血液疾病（粒細胞缺乏症病史）
+  </div>
+  <div class="info-box">
+    <strong>⚫ 特別警示：失智症老年患者</strong>
+    FDA 黑框警告：抗精神病藥（含第一代及第二代）用於失智症相關精神病老年患者，全因死亡率增加（主因：心血管事件、肺炎感染）。Flupenthixol 非此族群第一線選擇。<br>
+    <div class="ref">FDA Black Box Warning; Taylor DM et al. Maudsley Prescribing Guidelines. 14th ed. 2021</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PANEL 4 — 劑量指引
+══════════════════════════════════════ -->
+<div class="panel" id="panel-dosing">
+  <h2 class="stitle">劑量指引</h2>
+  <p class="sdesc">依適應症、族群及臨床反應調整，起始劑量宜保守。</p>
+
+  <div class="inner-tabs">
+    <button class="inner-tab-btn active" onclick="switchInner('dose-anxiety','dosing',this)">焦慮/憂鬱（0.5mg）</button>
+    <button class="inner-tab-btn" onclick="switchInner('dose-psychosis','dosing',this)">精神病（5mg）</button>
+    <button class="inner-tab-btn" onclick="switchInner('dose-special','dosing',this)">特殊族群</button>
+    <button class="inner-tab-btn" onclick="switchInner('dose-depot','dosing',this)">Depot 長效針劑</button>
+  </div>
+
+  <div class="inner-content active" id="dose-anxiety">
+    <div class="dosing-flow">
+      <div class="dosing-step" data-step="1"><div><h4>起始（第 1 週）</h4><p>早晨 <b>0.5mg</b>，評估耐受性</p></div></div>
+      <div class="dosing-step" data-step="2"><div><h4>效果不足</h4><p>增至 <b>1mg/day</b>（早晨單次，或早 0.5mg + 中午 0.5mg）</p></div></div>
+      <div class="dosing-step" data-step="3"><div><h4>維持期</h4><p>大多數維持 <b>0.5–1mg/day</b>，症狀穩定後以最低有效量</p></div></div>
+      <div class="dosing-step" data-step="4"><div><h4>最大劑量</h4><p>焦慮適應症最高 <b>3mg/day</b></p></div></div>
+    </div>
+    <div class="warn-box"><strong>⏰ 服藥時間</strong>低劑量具激活作用，<b>建議早晨或上午服用</b>，避免下午 3 點後給藥，以防入睡困難。</div>
+  </div>
+
+  <div class="inner-content" id="dose-psychosis">
+    <div class="dosing-flow">
+      <div class="dosing-step" data-step="1"><div><h4>急性期起始</h4><p><b>5–15mg/day</b>，分 2–3 次，密切監測</p></div></div>
+      <div class="dosing-step" data-step="2"><div><h4>劑量調整</h4><p>每 3–5 天依反應調整，每次增加 5mg</p></div></div>
+      <div class="dosing-step" data-step="3"><div><h4>維持期</h4><p>症狀穩定後漸降至 <b>5–20mg/day</b></p></div></div>
+      <div class="dosing-step" data-step="4"><div><h4>難治案例</h4><p>最高可至 <b>40mg/day</b>，需密切監測 EPS</p></div></div>
+    </div>
+  </div>
+
+  <div class="inner-content" id="dose-special">
+    <div class="card-grid">
+      <div class="card"><h3>👴 老年患者</h3><ul><li>起始劑量減半（0.25–0.5mg / 2.5mg）</li><li>注意跌倒風險（姿勢性低血壓）</li><li>QTc 基線評估建議</li><li>定期認知評估</li></ul></div>
+      <div class="card warn"><h3>🍶 肝腎功能不全</h3><ul><li>嚴重肝功能不全：禁用</li><li>中度肝損傷：謹慎，減量</li><li>腎功能不全：無需常規調整，監測</li></ul></div>
+      <div class="card danger"><h3>🤰 孕婦/哺乳</h3><ul><li>FDA 分類：C 類</li><li>孕晚期：新生兒可能出現 EPS 或戒斷症狀（短暫）</li><li>哺乳：乳汁/血漿比約 1.3，建議停止哺乳</li><li>評估風險/效益後方使用</li></ul></div>
+      <div class="card"><h3>👶 兒童/青少年</h3><ul><li>安全性/有效性尚未完整建立</li><li>一般不建議 18 歲以下使用</li><li>若必要，由兒童精神科評估</li></ul></div>
+    </div>
+  </div>
+
+  <div class="inner-content" id="dose-depot">
+    <div class="info-box">
+      <strong>💉 Flupenthixol Decanoate（長效針劑）</strong><br>
+      適用對象：口服依從性差、反覆復發的慢性精神病患者
+    </div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>項目</th><th>說明</th></tr>
+        <tr><td>起始劑量</td><td>10–20mg 肌肉注射，評估耐受性</td></tr>
+        <tr><td>維持劑量</td><td>12.5–400mg，每 2–4 週</td></tr>
+        <tr><td>Depot t½</td><td>~17 天</td></tr>
+        <tr><td>轉換策略</td><td>先以口服確認耐受性 → 計算等效 depot 劑量 → 初次注射後口服重疊 1–2 週 → 定期追蹤</td></tr>
+        <tr><td>臨床效益</td><td>Cochrane 回顧：復發率與其他 depot 相當（OR 1.16, CI 0.7–1.9）；消除口服依從性問題</td></tr>
+      </table>
+    </div>
+    <div class="ref">Mahapatra J et al. Cochrane Database Syst Rev. 2014;CD001470</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PANEL 5 — 藥物比較
+══════════════════════════════════════ -->
+<div class="panel" id="panel-comparison">
+  <h2 class="stitle">藥物比較</h2>
+  <p class="sdesc">與同類抗精神病藥及抗焦慮藥特性比較，協助臨床選藥決策。</p>
+
+  <div class="inner-tabs">
+    <button class="inner-tab-btn active" onclick="switchInner('cmp-ap','comparison',this)">vs 抗精神病藥</button>
+    <button class="inner-tab-btn" onclick="switchInner('cmp-anx','comparison',this)">vs 抗焦慮藥</button>
+    <button class="inner-tab-btn" onclick="switchInner('cmp-rct','comparison',this)">RCT 實證數據</button>
+    <button class="inner-tab-btn" onclick="switchInner('cmp-adv','comparison',this)">Fute 核心優勢</button>
+  </div>
+
+  <div class="inner-content active" id="cmp-ap">
+    <div class="table-wrap">
+      <table>
+        <tr><th>特性</th><th>Flupenthixol (Fute)</th><th>Haloperidol</th><th>Risperidone</th><th>Olanzapine</th><th>Quetiapine</th></tr>
+        <tr><td>分類</td><td>第一代</td><td>第一代</td><td>第二代</td><td>第二代</td><td>第二代</td></tr>
+        <tr><td>陽性症狀</td><td class="check">✓✓</td><td class="check">✓✓✓</td><td class="check">✓✓✓</td><td class="check">✓✓✓</td><td class="check">✓✓</td></tr>
+        <tr><td>陰性症狀</td><td class="check">✓✓</td><td class="cross">✗</td><td class="partial">✓</td><td class="check">✓✓</td><td class="partial">✓</td></tr>
+        <tr><td>EPS 風險</td><td class="partial">中</td><td class="cross">高</td><td class="partial">中-低</td><td class="check">低</td><td class="check">低</td></tr>
+        <tr><td>體重增加</td><td class="check">低</td><td class="check">低</td><td class="partial">中</td><td class="cross">高</td><td class="partial">中-高</td></tr>
+        <tr><td>代謝副作用</td><td class="check">低</td><td class="check">低</td><td class="partial">中</td><td class="cross">高</td><td class="partial">中</td></tr>
+        <tr><td>鎮靜程度</td><td class="check">低-中</td><td class="partial">中</td><td class="partial">中</td><td class="cross">高</td><td class="cross">高</td></tr>
+        <tr><td>激活/抗憂鬱</td><td class="check">✓（低劑量）</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="partial">部分</td></tr>
+        <tr><td>高泌乳素血症</td><td class="cross">會</td><td class="cross">高</td><td class="cross">高</td><td class="check">低</td><td class="check">低</td></tr>
+        <tr class="row-hl"><td>藥費（相對）</td><td>低 ✓</td><td>低 ✓</td><td>中</td><td>中-高</td><td>中-高</td></tr>
+        <tr class="row-hl"><td>Depot 針劑</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✗</td></tr>
+      </table>
+    </div>
+    <div class="ref">Leucht S et al. Lancet. 2013;382:951-962 | Huhn M et al. Lancet. 2019;394:939-951</div>
+  </div>
+
+  <div class="inner-content" id="cmp-anx">
+    <div class="table-wrap">
+      <table>
+        <tr><th>特性</th><th>Flupenthixol 0.5mg</th><th>Benzodiazepines</th><th>SSRIs</th><th>Buspirone</th><th>Hydroxyzine</th></tr>
+        <tr><td>起效時間</td><td>數天</td><td class="check">快（30 分鐘）</td><td class="cross">2–4 週</td><td class="cross">2–4 週</td><td class="check">快</td></tr>
+        <tr><td>成癮性</td><td class="check">無</td><td class="cross">高</td><td class="check">無</td><td class="check">無</td><td class="check">無</td></tr>
+        <tr><td>戒斷症狀</td><td class="check">輕微</td><td class="cross">顯著</td><td class="partial">輕中度</td><td class="check">無</td><td class="check">無</td></tr>
+        <tr><td>抗憂鬱效果</td><td class="check">✓</td><td class="cross">✗</td><td class="check">✓✓</td><td class="partial">輕微</td><td class="cross">✗</td></tr>
+        <tr><td>鎮靜效果</td><td class="check">輕微</td><td class="cross">明顯</td><td class="check">輕微</td><td class="check">輕微</td><td class="cross">明顯</td></tr>
+        <tr><td>長期使用</td><td class="check">✓ 適合</td><td class="cross">不建議 &gt;4 週</td><td class="check">✓</td><td class="check">✓</td><td class="partial">有限</td></tr>
+        <tr><td>認知影響</td><td class="check">輕微</td><td class="cross">明顯損傷</td><td class="check">輕微</td><td class="check">輕微</td><td class="partial">輕微鈍化</td></tr>
+      </table>
+    </div>
+    <div class="info-box">
+      <strong>研究依據</strong>
+      Darcourt (1995) RCT：flupenthixol 0.5–1mg/day 在廣泛性焦慮症療效與 lorazepam 相當，但無 BZD 之戒斷與認知副作用。
+      <div class="ref">Darcourt G et al. Acta Psychiatr Scand Suppl. 1995;391:52-59</div>
+    </div>
+  </div>
+
+  <div class="inner-content" id="cmp-rct">
+    <div class="info-box">
+      <strong>🔬 Flupenthixol vs Risperidone — RCT（陰性症狀為主慢性思覺失調症）</strong><br>
+      設計：隨機雙盲多中心；N=153（另一研究 N=144）；治療期 24–25 週<br>
+      劑量：Flupenthixol 4–12mg/day vs Risperidone 2–6mg/day
+    </div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>指標</th><th>Flupenthixol</th><th>Risperidone</th><th>結論</th></tr>
+        <tr><td>陰性症狀（PANSS）</td><td class="check">改善</td><td class="check">改善</td><td>非劣性成立（週 8/16/24）</td></tr>
+        <tr><td>陽性症狀</td><td class="check">改善</td><td class="check">改善</td><td>兩組相當</td></tr>
+        <tr><td>憂鬱情緒</td><td class="check">效果量較大</td><td class="partial">改善</td><td>傾向 flupenthixol</td></tr>
+        <tr><td>主觀生活品質</td><td class="check">顯著優於</td><td>—</td><td>flupenthixol 較佳</td></tr>
+        <tr><td>體重/代謝</td><td class="check">影響較少</td><td class="partial">中度</td><td>flupenthixol 優勢</td></tr>
+        <tr><td>EPS</td><td class="partial">相似</td><td class="partial">相似</td><td>兩組相當</td></tr>
+        <tr class="row-hl"><td>藥費</td><td>低</td><td>中</td><td>flupenthixol 更具成本效益</td></tr>
+      </table>
+    </div>
+    <div class="ref">Schröder J et al. Eur Neuropsychopharmacol. 2007;17(2):77-86 | PubMed PMID:14509050</div>
+
+    <div class="info-box" style="margin-top:18px;">
+      <strong>📊 Cochrane 系統回顧：Depot Flupenthixol</strong><br>
+      • 復發率：與其他 depot 製劑無差異（OR 1.16, CI 0.7–1.9）<br>
+      • 高劑量與標準劑量療效相當，建議使用標準劑量以減少副作用<br>
+      • 現有證據品質多屬低或極低，需更多高品質 RCT
+      <div class="ref">Mahapatra J et al. Cochrane Database Syst Rev. 2014;CD001470</div>
+    </div>
+  </div>
+
+  <div class="inner-content" id="cmp-adv">
+    <div class="card-grid">
+      <div class="card accent"><h3>✅ 無成癮性，可長期使用</h3><p style="font-size:.88rem;margin-top:6px;">不同於 benzodiazepines，可長期安全使用，適合慢性焦慮管理。</p></div>
+      <div class="card accent"><h3>⚡ 低劑量激活效果</h3><p style="font-size:.88rem;margin-top:6px;">輕度精神激活，患者可維持日間功能，不同於傳統鎮靜劑。</p></div>
+      <div class="card accent"><h3>💊 雙適應症，一藥跨越</h3><p style="font-size:.88rem;margin-top:6px;">0.5mg 治焦慮/憂鬱，5mg 治精神病，熟悉一個藥物涵蓋多病症。</p></div>
+      <div class="card accent"><h3>💰 經濟實惠，健保給付</h3><p style="font-size:.88rem;margin-top:6px;">相比第二代抗精神病藥費用低，健保給付穩定，提升依從性。</p></div>
+      <div class="card accent"><h3>🏋️ 代謝副作用低</h3><p style="font-size:.88rem;margin-top:6px;">不顯著增加體重、血糖、血脂，適合有代謝症候群風險患者。</p></div>
+      <div class="card accent"><h3>🔗 Depot 選項</h3><p style="font-size:.88rem;margin-top:6px;">Decanoate 長效注射每 2–4 週一次，大幅改善服藥依從性。</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PANEL 6 — 特殊應用
+══════════════════════════════════════ -->
+<div class="panel" id="panel-special">
+  <h2 class="stitle">特殊臨床應用</h2>
+  <p class="sdesc">超出標準適應症的文獻記錄應用（使用前需評估個別效益風險比）。</p>
+  <div class="card-grid">
+    <div class="card warn">
+      <h3>🧩 邊緣性人格障礙 (BPD/EUPD)</h3>
+      <ul>
+        <li><b>自傷 RCT (N=37)：</b>flupenthixol vs 安慰劑，顯著降低重複自傷（RR 0.29, CI 0.1–0.81）</li>
+        <li><b>自殺意念：</b>案例報告（2022）depot 20mg/2週後完全緩解</li>
+        <li><b>開放性試驗：</b>flupenthixol 3mg/day 8 週，衝動性與精神病理顯著改善</li>
+        <li><b>證據品質：</b>有限（小型/case report），無 BPD 核准適應症</li>
+      </ul>
+      <div class="ref">Montgomery SA. 1979; PMC8776478 (2022); NCBI NBK126780</div>
+    </div>
+    <div class="card">
+      <h3>😴 心身症 / 功能性障礙</h3>
+      <ul>
+        <li>多中心試驗：flupenthixol decanoate 用於一般科心身症</li>
+        <li>緩解率：慢性疼痛 25%、心身症 29%、憂鬱焦慮 27%</li>
+        <li>超過 90% 患者有治療效益</li>
+        <li>EPS 缺乏或極輕微，無嚴重不良事件</li>
+      </ul>
+      <div class="ref">J Psychiatr Res. 1992. PMID:1496124</div>
+    </div>
+    <div class="card accent">
+      <h3>💊 Placida® 複方（Flupentixol + Melitracen）</h3>
+      <ul>
+        <li>成分：Flupentixol 0.5mg + Melitracen 10mg 固定複方</li>
+        <li>Phase IV RCT（印度，N=440，24 週）vs Escitalopram 10mg + Clonazepam 0.5mg</li>
+        <li>評估 HAM-D、HAM-A；週 4/8/16/24 追蹤</li>
+        <li>台灣現況：Fute 為單方製劑，複方未於台灣核准</li>
+      </ul>
+      <div class="ref">CTRI/2022/11/047050; ijclinicaltrials.com/article/view/740</div>
+    </div>
+    <div class="card">
+      <h3>🌐 地理與法規差異</h3>
+      <ul>
+        <li>台灣：✅ 已核准（衛署藥製字第 049577 號）</li>
+        <li>英國/澳洲/加拿大：✅ 已核准</li>
+        <li>德國/南非/伊朗：✅ 已核准</li>
+        <li>美國：❌ 未獲 FDA 核准</li>
+      </ul>
+      <div class="ref">Wikipedia Flupentixol 2024; 藥要看資料庫</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PANEL 7 — 安全性
+══════════════════════════════════════ -->
+<div class="panel" id="panel-safety">
+  <h2 class="stitle">安全性與副作用</h2>
+  <p class="sdesc">了解副作用有助於預防、早期發現與適當處置。</p>
+  <div class="card-grid">
+    <div class="card"><h3>🧠 錐體外症候 (EPS)</h3><ul><li><b>靜坐不能（15%）：</b>最常見，與憂鬱症狀程度相關</li><li><b>帕金森氏症候（13%）：</b>第 3 個月達高峰後下降</li><li><b>肌張力異常（7%）：</b>與較高劑量相關</li><li><b>遲發性運動障礙（6%）：</b>長期高劑量風險</li><li><b>處置：</b>降劑量、加 biperiden</li></ul></div>
+    <div class="card warn"><h3>❤️ 心血管</h3><ul><li>姿勢性低血壓（α₁ 拮抗）</li><li>QTc 延長（較 thioridazine 少見）</li><li>反射性心搏過速</li><li>高風險患者建議基線心電圖</li></ul></div>
+    <div class="card"><h3>🧪 代謝/內分泌</h3><ul><li>高泌乳素血症（D2 阻斷）</li><li>月經不規則、性功能障礙</li><li>男性女乳症（少見）</li><li>體重：輕微影響（優於第二代）</li></ul></div>
+    <div class="card danger"><h3>⚠️ 罕見嚴重副作用</h3><ul><li><b>惡性症候群 (NMS)：</b>高熱+僵硬+意識改變 → 急診</li><li><b>粒細胞缺乏症：</b>注意感染徵象</li><li><b>癲癇閾值降低：</b>癲癇患者慎用</li><li><b>光敏感：</b>建議防曬</li></ul></div>
+  </div>
+
+  <div class="info-box">
+    <strong>📊 EPS 時程實證（首發思覺失調症 N=130，12 個月前瞻性研究）</strong>
+    <div class="table-wrap" style="margin-top:10px;">
+      <table>
+        <tr><th>EPS 類型</th><th>發生率</th><th>預測因子</th><th>時程</th></tr>
+        <tr><td>靜坐不能</td><td>15%</td><td>較高憂鬱症狀程度</td><td>初期常見</td></tr>
+        <tr><td>帕金森氏症候</td><td>13%</td><td>PANSS 分數高、白人種族</td><td>第 3 個月高峰後下降</td></tr>
+        <tr><td>肌張力異常</td><td>7%</td><td>較高藥物劑量</td><td>早期發生</td></tr>
+        <tr><td>運動障礙</td><td>6%</td><td>12 個月內無明確預測因子</td><td>—</td></tr>
+      </table>
+    </div>
+    <p style="font-size:.85rem;margin-top:8px;"><b>關鍵：</b>整體 ESRS 第 3 個月達高峰後逐漸下降，至第 12 個月接近基線，<b>整體耐受性良好</b>。</p>
+    <div class="ref">Joubert J et al. S Afr J Psychiatry. 2021;27:1568. PMC7876946</div>
+  </div>
+
+  <div class="info-box">
+    <strong>💊 重要藥物交互作用</strong>
+    <div class="table-wrap" style="margin-top:10px;">
+      <table>
+        <tr><th>交互藥物</th><th>效應</th><th>處置</th></tr>
+        <tr><td>酒精 / CNS 抑制劑</td><td>中樞抑制加強</td><td>避免合用</td></tr>
+        <tr><td>Levodopa / 多巴胺促效劑</td><td>療效相互拮抗</td><td>避免合用</td></tr>
+        <tr><td>CYP2D6 抑制劑（fluoxetine、paroxetine）</td><td>Flupenthixol 濃度↑</td><td>監測副作用，考慮降劑量</td></tr>
+        <tr><td>QTc 延長藥物（quinolones、amiodarone、TCA）</td><td>QTc 延長加劇</td><td>避免合用，監測心電圖</td></tr>
+        <tr><td>Lithium</td><td>NMS 及神經毒性風險↑</td><td>密切監測</td></tr>
+        <tr><td>Anticholinergics</td><td>抗膽鹼效應加強</td><td>謹慎</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="danger-box">
+    <strong>🚨 惡性症候群 (NMS) — 警示</strong>
+    四大症狀：高熱 (&gt;38°C) + 肌肉僵硬 + 意識改變 + 自主神經不穩定<br>
+    實驗室：CPK 顯著上升、白血球增加<br>
+    處置：立即停藥、支持療法、考慮 dantrolene / bromocriptine、急診評估<br>
+    死亡率：未及時處理可達 5–20%
+  </div>
+
+  <div class="warn-box">
+    <strong>⚠️ QTc 監測建議</strong>
+    高風險情況需基線心電圖：心臟病史、合用 QTc 延長藥、低血鉀/鎂、遺傳性 long QT、老年高劑量。<br>
+    警戒值：QTc &gt;450ms（男）/ &gt;470ms（女）謹慎；&gt;500ms 停藥。
+    <div class="ref">Taylor DM et al. Maudsley Guidelines. 14th ed. 2021</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PANEL 8 — Q&A
+══════════════════════════════════════ -->
+<div class="panel" id="panel-qa">
+  <h2 class="stitle">臨床 Q&amp;A 模擬</h2>
+  <p class="sdesc">23 題臨床問答，依分類篩選，支援關鍵字搜尋，點擊問題展開詳解。</p>
+  <input class="search-bar" type="text" id="qaSearch" placeholder="🔍 搜尋問題關鍵字..." oninput="filterQA()">
+  <div class="qa-categories">
+    <button class="cat-btn active" onclick="filterCategory('all',this)">全部</button>
+    <button class="cat-btn" onclick="filterCategory('basic',this)">基礎藥理</button>
+    <button class="cat-btn" onclick="filterCategory('dosing',this)">劑量用法</button>
+    <button class="cat-btn" onclick="filterCategory('safety',this)">安全性</button>
+    <button class="cat-btn" onclick="filterCategory('clinical',this)">臨床應用</button>
+    <button class="cat-btn" onclick="filterCategory('comparison',this)">藥物比較</button>
+    <button class="cat-btn" onclick="filterCategory('special',this)">特殊族群</button>
+  </div>
+  <div class="qa-list" id="qaList"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PANEL 9 — 自我測驗
+══════════════════════════════════════ -->
+<div class="panel" id="panel-quiz">
+  <h2 class="stitle">自我測驗</h2>
+  <p class="sdesc">共 10 題，選擇後即時顯示答案解析，完成後顯示總分。</p>
+  <div id="quizContainer"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PANEL — 推廣話術
+══════════════════════════════════════ -->
+<div class="panel" id="panel-promo">
+  <div style="background:linear-gradient(135deg,#1a5276,#1abc9c);color:#fff;border-radius:12px;padding:26px 30px;margin-bottom:24px;">
+    <h2 style="font-size:1.7rem;margin-bottom:6px;">🎯 臨床推廣話術指南</h2>
+    <p style="opacity:.88;font-size:.95rem;">針對不同臨床情境、患者族群與醫師疑慮，提供具說服力的溝通策略與實證依據</p>
+  </div>
+
+  <div class="inner-tabs">
+    <button class="inner-tab-btn active" onclick="switchInner('promo-core','promo',this)">💡 核心訊息</button>
+    <button class="inner-tab-btn" onclick="switchInner('promo-scenario','promo',this)">🏥 臨床情境</button>
+    <button class="inner-tab-btn" onclick="switchInner('promo-objection','promo',this)">🛡️ 疑慮應對</button>
+    <button class="inner-tab-btn" onclick="switchInner('promo-script','promo',this)">💬 完整話術腳本</button>
+    <button class="inner-tab-btn" onclick="switchInner('promo-visual','promo',this)">📊 視覺化重點</button>
+  </div>
+
+  <!-- 核心訊息 -->
+  <div class="inner-content active" id="promo-core">
+    <p class="sdesc">推廣 Fute 的五大核心訊息，每一點都有實證依據支撐。</p>
+
+    <div style="display:flex;flex-direction:column;gap:16px;">
+
+      <div style="background:#fff;border-radius:12px;padding:22px;box-shadow:0 2px 10px rgba(0,0,0,.08);border-left:6px solid #1abc9c;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+          <span style="font-size:2rem;">✅</span>
+          <h3 style="color:#1a5276;font-size:1.1rem;">訊息一：唯一同時兼顧焦慮、憂鬱與精神病的口服藥物</h3>
+        </div>
+        <p style="font-size:.9rem;margin-bottom:8px;">Fute 0.5mg 治療輕至中度焦慮合併憂鬱，Fute 5mg 治療思覺失調症——<strong>同一個藥物成分，跨越兩個完全不同的適應症</strong>，醫師只需熟悉一種藥物便能應對精神科常見情境。</p>
+        <div style="background:#eaf4fb;border-radius:8px;padding:10px 14px;font-size:.84rem;color:#2e86c1;">
+          💬 話術：<em>「Fute 是目前市場上少數能在低劑量治療焦慮、高劑量治療精神病的口服藥物，處方邏輯清楚，不需要在不同藥物之間切換。」</em>
+        </div>
+      </div>
+
+      <div style="background:#fff;border-radius:12px;padding:22px;box-shadow:0 2px 10px rgba(0,0,0,.08);border-left:6px solid #2e86c1;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+          <span style="font-size:2rem;">🚫</span>
+          <h3 style="color:#1a5276;font-size:1.1rem;">訊息二：無成癮性，長期使用無後顧之憂</h3>
+        </div>
+        <p style="font-size:.9rem;margin-bottom:8px;">與 benzodiazepines 相比，flupenthixol <strong>無成癮性、無戒斷症狀</strong>，可長期處方而不受藥事法令對苯二氮平類的限制，也不必擔心患者要求增量或自行停藥後的反彈焦慮。</p>
+        <div style="background:#eaf4fb;border-radius:8px;padding:10px 14px;font-size:.84rem;color:#2e86c1;">
+          💬 話術：<em>「對於慢性焦慮患者，我們不需要再煩惱苯二氮平的成癮問題。Fute 長期使用安全，下次回診時患者不會要求增加劑量。」</em>
+        </div>
+      </div>
+
+      <div style="background:#fff;border-radius:12px;padding:22px;box-shadow:0 2px 10px rgba(0,0,0,.08);border-left:6px solid #e67e22;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+          <span style="font-size:2rem;">⚡</span>
+          <h3 style="color:#1a5276;font-size:1.1rem;">訊息三：激活效果，讓患者保持日間功能</h3>
+        </div>
+        <p style="font-size:.9rem;margin-bottom:8px;">低劑量 Fute <strong>不是鎮靜劑，而是激活劑</strong>。患者服用後不會昏沉想睡、認知不會鈍化，能繼續工作、照顧家庭。這是對需要維持日間生產力的焦慮患者的最大優勢。</p>
+        <div style="background:#fef9e7;border-radius:8px;padding:10px 14px;font-size:.84rem;color:#e67e22;">
+          💬 話術：<em>「很多患者抱怨吃了安眠藥或抗焦慮藥之後白天沒精神、工作效率下降。Fute 低劑量反而有輕微提神的效果，早上吃完去上班，不影響日間功能。」</em>
+        </div>
+      </div>
+
+      <div style="background:#fff;border-radius:12px;padding:22px;box-shadow:0 2px 10px rgba(0,0,0,.08);border-left:6px solid #1a5276;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+          <span style="font-size:2rem;">💰</span>
+          <h3 style="color:#1a5276;font-size:1.1rem;">訊息四：代謝友善＋健保給付，減少患者負擔</h3>
+        </div>
+        <p style="font-size:.9rem;margin-bottom:8px;">相比 olanzapine、quetiapine 等第二代藥物，flupenthixol <strong>幾乎不增加體重、不影響血糖血脂</strong>，對有代謝症候群風險的患者更安全。加上健保給付穩定，患者自費負擔低，服藥依從性更高。</p>
+        <div style="background:#eaf4fb;border-radius:8px;padding:10px 14px;font-size:.84rem;color:#2e86c1;">
+          💬 話術：<em>「這位患者本來就有糖尿病，如果用 olanzapine 體重和血糖都會惡化。Fute 代謝副作用低，又是健保給付，長期下來患者比較能配合治療。」</em>
+        </div>
+      </div>
+
+      <div style="background:#fff;border-radius:12px;padding:22px;box-shadow:0 2px 10px rgba(0,0,0,.08);border-left:6px solid #e74c3c;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+          <span style="font-size:2rem;">📊</span>
+          <h3 style="color:#1a5276;font-size:1.1rem;">訊息五：實證不輸第二代，陰性症狀不劣於 Risperidone</h3>
+        </div>
+        <p style="font-size:.9rem;margin-bottom:8px;">隨機雙盲多中心試驗（N=153，24 週）顯示，flupenthixol 對思覺失調症<strong>陰性症狀的改善不劣於 risperidone</strong>，且在主觀生活品質與憂鬱情緒改善上更優，藥費卻更低。</p>
+        <div style="background:#fdedec;border-radius:8px;padding:10px 14px;font-size:.84rem;color:#e74c3c;">
+          💬 話術：<em>「有醫師擔心第一代藥物對陰性症狀效果差，但 2007 年的頭對頭 RCT 已經證明 flupenthixol 陰性症狀療效不輸 risperidone，患者的主觀感受甚至更好。」</em>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 臨床情境 -->
+  <div class="inner-content" id="promo-scenario">
+    <p class="sdesc">依照門診最常見的六種臨床情境，提供對應的推薦邏輯與話術。</p>
+
+    <div style="display:flex;flex-direction:column;gap:18px;">
+
+      <div style="background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.08);">
+        <div style="background:#1a5276;color:#fff;padding:14px 20px;display:flex;align-items:center;gap:10px;">
+          <span style="font-size:1.4rem;">👔</span>
+          <div><strong>情境一：上班族慢性焦慮、睡眠品質差</strong><div style="font-size:.8rem;opacity:.8;">適用：Fute 0.5mg</div></div>
+        </div>
+        <div style="padding:18px 20px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+            <div style="background:#fdedec;border-radius:8px;padding:12px;font-size:.85rem;">
+              <strong style="color:#e74c3c;">❌ 不選 BZD 的理由</strong><br>
+              成癮風險、認知影響、白天昏沉、法規限制長期使用
+            </div>
+            <div style="background:#d5f5e3;border-radius:8px;padding:12px;font-size:.85rem;">
+              <strong style="color:#1abc9c;">✅ 選 Fute 0.5mg 的理由</strong><br>
+              無成癮、激活效果、不影響工作、長期安全
+            </div>
+          </div>
+          <div style="background:#eaf4fb;border-radius:8px;padding:13px 16px;font-size:.88rem;border-left:4px solid #2e86c1;">
+            <strong>🗣️ 推薦話術：</strong><br>
+            「這位患者工作壓力大，長期焦慮但白天還要上班。BZD 會讓他白天沒精神，而且吃久了還有依賴的問題。我建議早上給他一顆 Fute 0.5mg——低劑量反而有輕微提振精神的效果，不影響工作，下班後焦慮也能緩解，不用擔心長期處方。」
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.08);">
+        <div style="background:#154360;color:#fff;padding:14px 20px;display:flex;align-items:center;gap:10px;">
+          <span style="font-size:1.4rem;">😔</span>
+          <div><strong>情境二：憂鬱合併焦慮，不想吃 SSRI 的患者</strong><div style="font-size:.8rem;opacity:.8;">適用：Fute 0.5mg</div></div>
+        </div>
+        <div style="padding:18px 20px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+            <div style="background:#fdedec;border-radius:8px;padding:12px;font-size:.85rem;">
+              <strong style="color:#e74c3c;">❌ 不選 SSRI 的情況</strong><br>
+              患者抗拒、起效慢（2–4 週）、性功能副作用、胃腸不適
+            </div>
+            <div style="background:#d5f5e3;border-radius:8px;padding:12px;font-size:.85rem;">
+              <strong style="color:#1abc9c;">✅ 選 Fute 0.5mg 的理由</strong><br>
+              起效較快（1–2 週）、雙重效果、副作用輕微
+            </div>
+          </div>
+          <div style="background:#eaf4fb;border-radius:8px;padding:13px 16px;font-size:.88rem;border-left:4px solid #2e86c1;">
+            <strong>🗣️ 推薦話術：</strong><br>
+            「患者有輕度憂鬱加焦慮，又說之前吃 SSRI 胃很不舒服不想再試。Fute 0.5mg 早晨一顆，一到兩週就能感受到效果，焦慮跟情緒低落都能兼顧，副作用也比 SSRI 少，是很好的替代方案。」
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.08);">
+        <div style="background:#1e8449;color:#fff;padding:14px 20px;display:flex;align-items:center;gap:10px;">
+          <span style="font-size:1.4rem;">🏋️</span>
+          <div><strong>情境三：思覺失調症患者有代謝症候群 / 糖尿病</strong><div style="font-size:.8rem;opacity:.8;">適用：Fute 5mg</div></div>
+        </div>
+        <div style="padding:18px 20px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+            <div style="background:#fdedec;border-radius:8px;padding:12px;font-size:.85rem;">
+              <strong style="color:#e74c3c;">❌ 避免 Olanzapine / Quetiapine</strong><br>
+              顯著體重增加、血糖惡化、血脂異常，代謝風險高
+            </div>
+            <div style="background:#d5f5e3;border-radius:8px;padding:12px;font-size:.85rem;">
+              <strong style="color:#1abc9c;">✅ 選 Fute 5mg 的理由</strong><br>
+              代謝副作用低、不顯著影響血糖血脂、健保給付
+            </div>
+          </div>
+          <div style="background:#eaf4fb;border-radius:8px;padding:13px 16px;font-size:.88rem;border-left:4px solid #2e86c1;">
+            <strong>🗣️ 推薦話術：</strong><br>
+            「這位患者 BMI 已經 28，加上有第二型糖尿病，如果用 olanzapine 代謝問題會更嚴重，內科醫師也會抱怨。Fute 5mg 的代謝影響輕微，不用擔心體重和血糖，又有 depot 選項，很適合這類患者。」
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.08);">
+        <div style="background:#6c3483;color:#fff;padding:14px 20px;display:flex;align-items:center;gap:10px;">
+          <span style="font-size:1.4rem;">🔄</span>
+          <div><strong>情境四：慢性思覺失調症、服藥依從性差、反覆住院</strong><div style="font-size:.8rem;opacity:.8;">適用：Fute 5mg → Depot</div></div>
+        </div>
+        <div style="padding:18px 20px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+            <div style="background:#fdedec;border-radius:8px;padding:12px;font-size:.85rem;">
+              <strong style="color:#e74c3c;">❌ 口服單方挑戰</strong><br>
+              患者忘記吃藥、家屬難以監督、反覆停藥復發
+            </div>
+            <div style="background:#d5f5e3;border-radius:8px;padding:12px;font-size:.85rem;">
+              <strong style="color:#1abc9c;">✅ Depot 的核心優勢</strong><br>
+              每 2–4 週注射一次，消除依從性問題，早期偵測復發
+            </div>
+          </div>
+          <div style="background:#eaf4fb;border-radius:8px;padding:13px 16px;font-size:.88rem;border-left:4px solid #2e86c1;">
+            <strong>🗣️ 推薦話術：</strong><br>
+            「這個案主一年住院三次，每次都是自己停藥。與其每天叮嚀吃藥，不如換成 flupenthixol decanoate，兩週到診所打一針，家屬不用每天盯，我們也能在回診時直接評估。Cochrane 回顧顯示 depot 療效與其他針劑相當，而且成本更低。」
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.08);">
+        <div style="background:#784212;color:#fff;padding:14px 20px;display:flex;align-items:center;gap:10px;">
+          <span style="font-size:1.4rem;">👴</span>
+          <div><strong>情境五：老年患者輕度焦慮、不想用 BZD</strong><div style="font-size:.8rem;opacity:.8;">適用：Fute 0.5mg 低劑量</div></div>
+        </div>
+        <div style="padding:18px 20px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+            <div style="background:#fdedec;border-radius:8px;padding:12px;font-size:.85rem;">
+              <strong style="color:#e74c3c;">❌ 老年用 BZD 的風險</strong><br>
+              跌倒骨折、記憶損傷、呼吸抑制（合併 COPD）、成癮
+            </div>
+            <div style="background:#d5f5e3;border-radius:8px;padding:12px;font-size:.85rem;">
+              <strong style="color:#1abc9c;">✅ Fute 0.5mg 低劑量</strong><br>
+              從 0.25mg 起始、無成癮、不損傷記憶、認知影響輕
+            </div>
+          </div>
+          <div style="background:#eaf4fb;border-radius:8px;padding:13px 16px;font-size:.88rem;border-left:4px solid #2e86c1;">
+            <strong>🗣️ 推薦話術：</strong><br>
+            「75 歲的阿嬤焦慮失眠，家屬擔心用 BZD 會跌倒。我給她 Fute 0.5mg，早上半顆（0.25mg）開始，不鎮靜、不影響記憶，比 BZD 安全多了，家屬也放心。」
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.08);">
+        <div style="background:#1a5276;color:#fff;padding:14px 20px;display:flex;align-items:center;gap:10px;">
+          <span style="font-size:1.4rem;">🏥</span>
+          <div><strong>情境六：功能科（腸胃科/家醫科）合併心身症與焦慮</strong><div style="font-size:.8rem;opacity:.8;">適用：Fute 0.5mg</div></div>
+        </div>
+        <div style="padding:18px 20px;">
+          <div style="background:#eaf4fb;border-radius:8px;padding:13px 16px;font-size:.88rem;border-left:4px solid #2e86c1;">
+            <strong>🗣️ 推薦話術：</strong><br>
+            「腸躁症患者反覆腹痛，但腸鏡都正常，背後就是焦慮在作怪。Fute 0.5mg 早上一顆，多中心試驗顯示心身症患者有治療效益的高達 90% 以上，不用精神科專科也能安心處方，對功能科門診非常實用。」
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 疑慮應對 -->
+  <div class="inner-content" id="promo-objection">
+    <p class="sdesc">臨床上醫師最常提出的六大疑慮，以及有實證依據的應對策略。</p>
+
+    <div style="display:flex;flex-direction:column;gap:14px;">
+
+      <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.07);">
+        <div style="background:#c0392b;color:#fff;padding:11px 18px;font-weight:600;font-size:.92rem;">
+          🔴 疑慮一：「第一代抗精神病藥 EPS 很多，不敢用」
+        </div>
+        <div style="padding:16px 18px;font-size:.88rem;">
+          <p style="margin-bottom:10px;"><strong>應對：</strong>Flupenthixol 的 EPS 風險確實存在，但有三個關鍵緩解因素：</p>
+          <ul style="padding-left:18px;line-height:2;">
+            <li>12 個月前瞻性研究（N=130）顯示 EPS <strong>第 3 個月達高峰後自行下降</strong>，至 12 個月時接近基線</li>
+            <li>低劑量（0.5mg）焦慮適應症下，EPS 發生率極低</li>
+            <li>出現 EPS 可加 biperiden 處理，有成熟應對方案</li>
+          </ul>
+          <div style="background:#fef9e7;border-radius:8px;padding:10px 14px;margin-top:10px;">
+            💬 <em>「EPS 確實是第一代的特性，但 flupenthixol 的 EPS 多在初期出現、之後自行緩解。臨床上從低劑量開始，必要時加用 biperiden，完全可以管控。」</em>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.07);">
+        <div style="background:#c0392b;color:#fff;padding:11px 18px;font-weight:600;font-size:.92rem;">
+          🔴 疑慮二：「第一代藥對陰性症狀沒用，為什麼不直接用第二代？」
+        </div>
+        <div style="padding:16px 18px;font-size:.88rem;">
+          <p style="margin-bottom:10px;"><strong>應對：</strong>這個觀念對 haloperidol 比較成立，但 flupenthixol 有獨特的 D1 拮抗優勢：</p>
+          <ul style="padding-left:18px;line-height:2;">
+            <li>D1 受體親和力（Ki = 3.5 nM）為所有舊型抗精神病藥中<strong>最強</strong></li>
+            <li>RCT（N=153，24 週）：flupenthixol 陰性症狀改善<strong>不劣於 risperidone</strong></li>
+            <li>主觀生活品質、憂鬱情緒改善甚至優於 risperidone</li>
+            <li>代謝副作用遠低於 olanzapine、quetiapine</li>
+          </ul>
+          <div style="background:#fef9e7;border-radius:8px;padding:10px 14px;margin-top:10px;">
+            💬 <em>「Flupenthixol 的 D1 拮抗是同類最強，這正是它對陰性症狀有效的原因。頭對頭 RCT 已經證明不輸 risperidone，但代謝副作用比 risperidone 還少，費用也更低。」</em>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.07);">
+        <div style="background:#c0392b;color:#fff;padding:11px 18px;font-weight:600;font-size:.92rem;">
+          🔴 疑慮三：「患者會不會因為 EPS 停藥？」
+        </div>
+        <div style="padding:16px 18px;font-size:.88rem;">
+          <p style="margin-bottom:10px;"><strong>應對：</strong>三個層面的保護機制：</p>
+          <ul style="padding-left:18px;line-height:2;">
+            <li><strong>時程：</strong>EPS 在第 3 個月高峰後逐漸緩解，提前告知患者「初期可能有點不適但會改善」</li>
+            <li><strong>劑量：</strong>從低劑量開始，出現 EPS 先降劑量</li>
+            <li><strong>合用：</strong>必要時加 biperiden，靜坐不能加 propranolol</li>
+          </ul>
+          <div style="background:#fef9e7;border-radius:8px;padding:10px 14px;margin-top:10px;">
+            💬 <em>「提前和患者說『前兩三個月可能腿部有點坐不住的感覺，這是正常反應，會漸漸改善』，配合適當的 biperiden，大部分患者都能撐過去。」</em>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.07);">
+        <div style="background:#c0392b;color:#fff;padding:11px 18px;font-weight:600;font-size:.92rem;">
+          🔴 疑慮四：「遲發性運動障礙的長期風險太高」
+        </div>
+        <div style="padding:16px 18px;font-size:.88rem;">
+          <p style="margin-bottom:10px;"><strong>應對：</strong>風險可控，但需主動監測：</p>
+          <ul style="padding-left:18px;line-height:2;">
+            <li>TD 年發生率約 5%（第二代 ~1%），風險確實存在</li>
+            <li><strong>關鍵對策：</strong>使用最低有效劑量 + 定期 AIMS 評估（每 6 個月）</li>
+            <li>早期發現 → 降劑量或換藥，可逆性機會較高</li>
+            <li>若出現 TD：valbenazine / deutetrabenazine 可有效治療</li>
+          </ul>
+          <div style="background:#fef9e7;border-radius:8px;padding:10px 14px;margin-top:10px;">
+            💬 <em>「TD 風險第一代確實比第二代高，所以每半年做一次 AIMS 評估。早期發現調整劑量，對大多數患者來說風險都在可接受範圍內，尤其是低劑量焦慮用途幾乎不需擔心。」</em>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.07);">
+        <div style="background:#c0392b;color:#fff;padding:11px 18px;font-weight:600;font-size:.92rem;">
+          🔴 疑慮五：「0.5mg 劑量太小，效果真的夠嗎？」
+        </div>
+        <div style="padding:16px 18px;font-size:.88rem;">
+          <p style="margin-bottom:10px;"><strong>應對：</strong>低劑量有其獨特機轉，效果有 RCT 支撐：</p>
+          <ul style="padding-left:18px;line-height:2;">
+            <li>低劑量的機轉不同：作用突觸前 D2 自體受體，<strong>增加</strong>多巴胺傳導</li>
+            <li>RCT 顯示 0.5–1mg/day 焦慮療效與 lorazepam 相當</li>
+            <li>效果不足可漸增至 1mg、2mg，最高 3mg</li>
+          </ul>
+          <div style="background:#fef9e7;border-radius:8px;padding:10px 14px;margin-top:10px;">
+            💬 <em>「劑量小不代表效果弱——低劑量的作用機轉完全不同，是透過自體受體提升多巴胺，類似抗憂鬱劑的方向。臨床試驗已經證明和 BZD 療效相當。」</em>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.07);">
+        <div style="background:#c0392b;color:#fff;padding:11px 18px;font-weight:600;font-size:.92rem;">
+          🔴 疑慮六：「患者聽到『抗精神病藥』會拒絕」
+        </div>
+        <div style="padding:16px 18px;font-size:.88rem;">
+          <p style="margin-bottom:10px;"><strong>應對：</strong>溝通框架決定患者接受度：</p>
+          <ul style="padding-left:18px;line-height:2;">
+            <li>對患者說明「這是調節神經傳導物質的藥物，幫助大腦在焦慮時保持平衡」</li>
+            <li>強調「低劑量使用，和治療精神病的劑量完全不同」</li>
+            <li>類比：「就像 aspirin 低劑量防血栓、高劑量退燒，同一藥物不同劑量有不同用途」</li>
+          </ul>
+          <div style="background:#fef9e7;border-radius:8px;padding:10px 14px;margin-top:10px;">
+            💬 <em>「對患者說：『我給你開的這個藥，是幫助腦部的神經訊號在焦慮時恢復平衡，劑量非常低，和你可能聽過的精神病用藥是完全不同層次的。』」</em>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 完整話術腳本 -->
+  <div class="inner-content" id="promo-script">
+    <p class="sdesc">可直接在門診或業務推廣中使用的完整情境對話腳本，依對象分類。</p>
+
+    <div class="inner-tabs" style="margin-bottom:0;flex-wrap:wrap;">
+      <button class="inner-tab-btn active" data-nest="promo-script-tabs" onclick="switchNested('script-psych','promo-script-tabs',this)" style="font-size:.82rem;">精神科醫師</button>
+      <button class="inner-tab-btn" data-nest="promo-script-tabs" onclick="switchNested('script-gp','promo-script-tabs',this)" style="font-size:.82rem;">家醫科/內科</button>
+      <button class="inner-tab-btn" data-nest="promo-script-tabs" onclick="switchNested('script-neuro','promo-script-tabs',this)" style="font-size:.82rem;">神經科/老年科</button>
+      <button class="inner-tab-btn" data-nest="promo-script-tabs" onclick="switchNested('script-gi','promo-script-tabs',this)" style="font-size:.82rem;">腸胃科</button>
+      <button class="inner-tab-btn" data-nest="promo-script-tabs" onclick="switchNested('script-objhandle','promo-script-tabs',this)" style="font-size:.82rem;">現場異議處理</button>
+    </div>
+
+    <div id="promo-script-tabs" style="margin-top:16px;">
+
+      <!-- ── 精神科 ── -->
+      <div class="inner-content active" id="script-psych">
+
+        <div style="background:#fff;border-radius:10px;padding:22px;box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:18px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+            <span style="background:#1a5276;color:#fff;border-radius:6px;padding:4px 10px;font-size:.78rem;font-weight:700;">場景 A</span>
+            <h4 style="color:#1a5276;font-size:.98rem;">慢性思覺失調症、陰性症狀為主，目前用 haloperidol 效果不滿意</h4>
+          </div>
+          <div style="background:#f8f9fa;border-radius:8px;padding:16px;font-size:.87rem;line-height:2.1;border-left:4px solid #1a5276;">
+            <strong style="color:#1a5276;">業代：</strong>「李醫師，您最近有沒有遇到一些慢性思覺失調症患者，幻聽妄想控制得還好，但整個人情感很淡漠、動力很差，家屬覺得『人怪怪的』那種？」<br><br>
+            <strong style="color:#7f8c8d;">醫師：</strong>「有，這類患者最難處理，haloperidol 控制陽性症狀還行，但對陰性症狀根本沒用。」<br><br>
+            <strong style="color:#1a5276;">業代：</strong>「這正是 Fute 可以發揮的地方。Flupenthixol 的 D1 受體拮抗活性是所有第一代抗精神病藥裡面最強的，Ki 只有 3.5 nM。D1 受體在前額葉皮質的功能恢復，跟陰性症狀的改善直接相關。所以它對陰性症狀的效果比 haloperidol 好很多。」<br><br>
+            <strong style="color:#7f8c8d;">醫師：</strong>「那跟第二代比呢？第二代不是對陰性症狀更好？」<br><br>
+            <strong style="color:#1a5276;">業代：</strong>「這個問題問得很好。2007 年有一個雙盲多中心 RCT，N=153，跑了 24 週，直接拿 flupenthixol 4–12mg 去跟 risperidone 2–6mg 比陰性症狀——結果是<strong>不劣性成立</strong>，兩組沒有顯著差異。而且在憂鬱情緒和主觀生活品質方面，flupenthixol 組的患者反而比 risperidone 組更好。更重要的是代謝副作用——這類慢性患者很多已經有體重過重或血糖問題，flupenthixol 幾乎不影響代謝，risperidone 則有中度影響。健保費用也比 risperidone 低。」<br><br>
+            <strong style="color:#7f8c8d;">醫師：</strong>「聽起來不錯，那我試幾個病人看看。」<br><br>
+            <strong style="color:#1a5276;">業代：</strong>「謝謝李醫師。建議從 5mg 開始，每 3–5 天依反應調整，維持期多數患者 10–15mg 就夠了。如果之後遇到服藥依從性的問題，flupenthixol 還有 decanoate 的 depot 劑型，兩週打一針，依從性問題直接解決。」
+          </div>
+        </div>
+
+        <div style="background:#fff;border-radius:10px;padding:22px;box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:18px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+            <span style="background:#1a5276;color:#fff;border-radius:6px;padding:4px 10px;font-size:.78rem;font-weight:700;">場景 B</span>
+            <h4 style="color:#1a5276;font-size:.98rem;">思覺失調症患者有代謝症候群，不想再用 olanzapine</h4>
+          </div>
+          <div style="background:#f8f9fa;border-radius:8px;padding:16px;font-size:.87rem;line-height:2.1;border-left:4px solid #1a5276;">
+            <strong style="color:#1a5276;">業代：</strong>「陳醫師，您有沒有遇到思覺失調症患者，精神症狀控制還好，但體重一直飆升、血糖又開始走偏，家醫科那邊一直反映的那種？」<br><br>
+            <strong style="color:#7f8c8d;">醫師：</strong>「太多了，olanzapine 效果好但代謝真的很頭痛，常常被內科醫師罵。」<br><br>
+            <strong style="color:#1a5276;">業代：</strong>「Fute 5mg 在這個族群是非常好的選項。Flupenthixol 對代謝的影響是第一代裡面最小的，幾乎不增加體重、不影響血糖血脂——跟 olanzapine 或 quetiapine 完全是兩個世界。患者轉換過來之後，內科那邊的壓力也小很多。」<br><br>
+            <strong style="color:#7f8c8d;">醫師：</strong>「轉換會不會不穩定？」<br><br>
+            <strong style="color:#1a5276;">業代：</strong>「建議交叉換藥，olanzapine 慢慢減、flupenthixol 慢慢加，通常 2–4 週完成轉換。患者症狀穩定的話，這個過程很平順。如果之後擔心口服依從性，同樣可以轉 depot，每兩週一針，您的追蹤也更有效率。」
+          </div>
+        </div>
+
+        <div style="background:#fff;border-radius:10px;padding:22px;box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:18px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+            <span style="background:#1a5276;color:#fff;border-radius:6px;padding:4px 10px;font-size:.78rem;font-weight:700;">場景 C</span>
+            <h4 style="color:#1a5276;font-size:.98rem;">反覆住院的患者，口服依從性極差</h4>
+          </div>
+          <div style="background:#f8f9fa;border-radius:8px;padding:16px;font-size:.87rem;line-height:2.1;border-left:4px solid #1a5276;">
+            <strong style="color:#1a5276;">業代：</strong>「張醫師，您的門診有沒有那種一年住院兩三次、每次原因都是自己停藥的患者？」<br><br>
+            <strong style="color:#7f8c8d;">醫師：</strong>「有，很典型的病識感不足，你根本無法確定他有沒有在吃。」<br><br>
+            <strong style="color:#1a5276;">業代：</strong>「這種情況最適合 flupenthixol decanoate——長效針劑，每兩到四週肌肉注射一次。患者來診所打針您就知道他有用藥，不用靠他自己回報，家屬監督的壓力也大幅減輕。Cochrane 系統回顧顯示，flupenthixol depot 的復發預防效果跟其他 depot 製劑相當，而且費用比 risperidone 長效針（Risperdal Consta）低很多。」<br><br>
+            <strong style="color:#7f8c8d;">醫師：</strong>「轉 depot 的步驟怎麼做？」<br><br>
+            <strong style="color:#1a5276;">業代：</strong>「先用口服 Fute 5mg 確認患者耐受性沒問題，接著換算等效 depot 劑量——通常口服 10mg/day 對應 depot 約 40mg/4週。初次打 depot 後繼續口服重疊一到兩週，之後就完全以針劑維持，定期回診打針即可。整個轉換過程大約兩週，很順暢。」
+          </div>
+        </div>
+
+        <div style="background:#fff;border-radius:10px;padding:22px;box-shadow:0 2px 8px rgba(0,0,0,.07);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+            <span style="background:#1a5276;color:#fff;border-radius:6px;padding:4px 10px;font-size:.78rem;font-weight:700;">場景 D</span>
+            <h4 style="color:#1a5276;font-size:.98rem;">輕度憂鬱合併焦慮的患者，精神科門診初診</h4>
+          </div>
+          <div style="background:#f8f9fa;border-radius:8px;padding:16px;font-size:.87rem;line-height:2.1;border-left:4px solid #1a5276;">
+            <strong style="color:#1a5276;">業代：</strong>「王醫師，您的精神科門診應該也有不少輕至中度焦慮合併輕鬱症的患者，這種混合型其實不少見。」<br><br>
+            <strong style="color:#7f8c8d;">醫師：</strong>「對，通常我會開 SSRI，但有些患者說之前吃過反而有點激躁，或者胃很不舒服。」<br><br>
+            <strong style="color:#1a5276;">業代：</strong>「Fute 0.5mg 可以當很好的選項或輔助。它低劑量的機轉跟 SSRI 完全不同，是透過突觸前 D2 自體受體提升多巴胺傳導，帶來輕度激活跟抗憂鬱效果。起效比 SSRI 快，大約一到兩週，患者比較容易感受到改善。而且沒有 SSRI 常見的胃腸副作用或性功能問題。」<br><br>
+            <strong style="color:#7f8c8d;">醫師：</strong>「但還是抗精神病藥，患者會不會抗拒？」<br><br>
+            <strong style="color:#1a5276;">業代：</strong>「劑量上完全不同，0.5mg 的機轉跟高劑量抗精神病的方向甚至是相反的。對患者可以說是『調節腦部多巴胺平衡的低劑量藥物』，強調無成癮性和不鎮靜，接受度通常不錯。如果需要，可以同時搭配 SSRI，flupenthixol 快速改善焦慮、SSRI 做長期基礎治療，是很常見的組合。」
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── 家醫科/內科 ── -->
+      <div class="inner-content" id="script-gp">
+
+        <div style="background:#fff;border-radius:10px;padding:22px;box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:18px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+            <span style="background:#1abc9c;color:#fff;border-radius:6px;padding:4px 10px;font-size:.78rem;font-weight:700;">場景 A</span>
+            <h4 style="color:#1a5276;font-size:.98rem;">長期開 BZD 的患者，醫師擔心成癮問題</h4>
+          </div>
+          <div style="background:#f8f9fa;border-radius:8px;padding:16px;font-size:.87rem;line-height:2.1;border-left:4px solid #1abc9c;">
+            <strong style="color:#1abc9c;">業代：</strong>「林醫師，您的門診焦慮患者裡，有多少人已經吃 BZD 超過三個月了？」<br><br>
+            <strong style="color:#7f8c8d;">醫師：</strong>「說實在的，很多。有些患者吃了好幾年，我想幫他們減但他們不願意，一減就反彈說焦慮更嚴重。」<br><br>
+            <strong style="color:#1abc9c;">業代：</strong>「這是 BZD 最典型的困境。Fute 0.5mg 可以幫您打破這個僵局——它可以作為 BZD 減量的過渡藥物。方法是先加上 Fute 0.5mg，讓患者焦慮先獲得控制，然後 BZD 慢慢每週降 10–25%，通常幾個月內可以完全轉換。患者在轉換期不會因為 BZD 減量而感覺焦慮惡化，因為 Fute 已經撐住了。」<br><br>
+            <strong style="color:#7f8c8d;">醫師：</strong>「那轉換完成之後呢？能一直吃嗎？」<br><br>
+            <strong style="color:#1abc9c;">業代：</strong>「這正是 Fute 的優勢——完全沒有成癮性，沒有使用時間限制，長期處方不受健保或法規對 BZD 的管制。患者也不用擔心停藥的戒斷反應。對您來說，處方 Fute 比處方長期 BZD 在法規和醫療責任上都安全得多。」
+          </div>
+        </div>
+
+        <div style="background:#fff;border-radius:10px;padding:22px;box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:18px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+            <span style="background:#1abc9c;color:#fff;border-radius:6px;padding:4px 10px;font-size:.78rem;font-weight:700;">場景 B</span>
+            <h4 style="color:#1a5276;font-size:.98rem;">高壓力上班族，焦慮明顯但白天不能睡</h4>
+          </div>
+          <div style="background:#f8f9fa;border-radius:8px;padding:16px;font-size:.87rem;line-height:2.1;border-left:4px solid #1abc9c;">
+            <strong style="color:#1abc9c;">業代：</strong>「許醫師，您有沒有遇到那種科技業或金融業的患者，焦慮很明顯，但你開 BZD 他說白天昏昏的沒辦法開會？」<br><br>
+            <strong style="color:#7f8c8d;">醫師：</strong>「這種最難搞，患者又需要治療、又不能影響工作。」<br><br>
+            <strong style="color:#1abc9c;">業代：</strong>「Fute 0.5mg 完全符合這個需求。它的低劑量機轉跟鎮靜劑相反——是輕微激活，患者早上吃完，反而比較有精神去面對一天。焦慮緩解了，但不會昏昏沉沉、記憶力也不受影響。所有認知表現都維持正常，這對需要保持高效工作狀態的患者來說是非常大的優勢。只要記得一件事：早上吃，不要下午三點後吃，因為激活效果太晚吃可能影響入睡。」<br><br>
+            <strong style="color:#7f8c8d;">醫師：</strong>「好，這個族群我可以試試看。」
+          </div>
+        </div>
+
+        <div style="background:#fff;border-radius:10px;padding:22px;box-shadow:0 2px 8px rgba(0,0,0,.07);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+            <span style="background:#1abc9c;color:#fff;border-radius:6px;padding:4px 10px;font-size:.78rem;font-weight:700;">場景 C</span>
+            <h4 style="color:#1a5276;font-size:.98rem;">患者同時有憂鬱與焦慮，不想吃「抗憂鬱劑」</h4>
+          </div>
+          <div style="background:#f8f9fa;border-radius:8px;padding:16px;font-size:.87rem;line-height:2.1;border-left:4px solid #1abc9c;">
+            <strong style="color:#1abc9c;">業代：</strong>「林醫師，有沒有患者說『我不要吃抗憂鬱劑，聽說吃了就停不下來』，但他明顯有焦慮加憂鬱的症狀？」<br><br>
+            <strong style="color:#7f8c8d;">醫師：</strong>「常有，特別是年長一點的患者，對抗憂鬱劑有很強的偏見。」<br><br>
+            <strong style="color:#1abc9c;">業代：</strong>「Fute 0.5mg 是一個很好的切入點。它不是 SSRI，不被歸類為抗憂鬱劑，患者心理阻力小很多。您可以跟患者說是『調節神經穩定情緒的藥』。它對焦慮和輕度憂鬱都有效，而且——這點很重要——它確實沒有成癮性，患者的疑慮是錯的，但恰好 Fute 讓您可以誠實地說『這個不會依賴』。臨床 RCT 也顯示，一到兩週患者就能感受到改善，比 SSRI 的四週等待期快很多，患者信心比較不容易在等效期間就放棄。」
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── 神經科/老年科 ── -->
+      <div class="inner-content" id="script-neuro">
+
+        <div style="background:#fff;border-radius:10px;padding:22px;box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:18px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+            <span style="background:#8e44ad;color:#fff;border-radius:6px;padding:4px 10px;font-size:.78rem;font-weight:700;">場景 A</span>
+            <h4 style="color:#1a5276;font-size:.98rem;">老年患者焦慮、BZD 有跌倒風險，需要替代方案</h4>
+          </div>
+          <div style="background:#f8f9fa;border-radius:8px;padding:16px;font-size:.87rem;line-height:2.1;border-left:4px solid #8e44ad;">
+            <strong style="color:#8e44ad;">業代：</strong>「方醫師，在老年醫學的角度，BZD 在 Beers Criteria 上是明確要避免的藥物，但臨床上老年焦慮的替代方案不多，您平常怎麼處理？」<br><br>
+            <strong style="color:#7f8c8d;">醫師：</strong>「這是個難題，SSRI 起效太慢，患者等不了，BZD 又擔心跌倒，有時候真的兩難。」<br><br>
+            <strong style="color:#8e44ad;">業代：</strong>「Fute 0.5mg 可以填補這個空缺。從 0.25mg 開始（半顆），耐受之後再到 0.5mg。它的鎮靜效果非常輕微，不像 BZD 那樣讓老年人昏沉增加跌倒風險；認知影響也遠低於 BZD——這對本來就擔心認知退化的老年患者非常重要。而且無成癮性，長期使用沒有停藥困境。唯一需要注意的是姿勢性低血壓——起身時動作要慢，本來老年患者就應該這樣叮嚀，不是額外的新問題。」<br><br>
+            <strong style="color:#7f8c8d;">醫師：</strong>「那 QTc 方面有沒有問題？我們老年患者很多心臟問題。」<br><br>
+            <strong style="color:#8e44ad;">業代：</strong>「這是很重要的問題。Flupenthixol 在 0.5mg 低劑量使用時，QTc 延長風險相當低，遠低於 thioridazine 這類老一代藥物。但如果患者本來就有心臟病史，或者同時在用其他 QTc 延長藥物，建議做一個基線心電圖，之後按常規追蹤。大多數老年焦慮患者 0.5mg 的安全性是很好的。」
+          </div>
+        </div>
+
+        <div style="background:#fff;border-radius:10px;padding:22px;box-shadow:0 2px 8px rgba(0,0,0,.07);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+            <span style="background:#8e44ad;color:#fff;border-radius:6px;padding:4px 10px;font-size:.78rem;font-weight:700;">場景 B</span>
+            <h4 style="color:#1a5276;font-size:.98rem;">帕金森病患者合併焦慮（此為禁忌症場景，學習如何應對）</h4>
+          </div>
+          <div style="background:#fdedec;border-radius:8px;padding:16px;font-size:.87rem;line-height:2.1;border-left:4px solid #e74c3c;">
+            <strong style="color:#e74c3c;">⚠️ 重要：此為「禁忌症教育」場景——</strong><br><br>
+            <strong style="color:#8e44ad;">業代：</strong>「方醫師，有一個族群我需要特別提醒——帕金森病患者是 flupenthixol 的<strong>禁忌症</strong>，包括路易體失智症也是。這些患者的多巴胺神經系統本來就受損，再加上 D2 拮抗劑會讓帕金森症狀急劇惡化。」<br><br>
+            <strong style="color:#7f8c8d;">醫師：</strong>「那帕金森合併焦慮怎麼辦？」<br><br>
+            <strong style="color:#8e44ad;">業代：</strong>「這族群建議用 buspirone 或低劑量 SSRI，不要用任何多巴胺拮抗劑。我今天特別說明這個，是希望 Fute 的適應族群選得精準，避免誤用。用對的人，效果好；用錯的人，可能造成傷害。」
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── 腸胃科 ── -->
+      <div class="inner-content" id="script-gi">
+
+        <div style="background:#fff;border-radius:10px;padding:22px;box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:18px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+            <span style="background:#e67e22;color:#fff;border-radius:6px;padding:4px 10px;font-size:.78rem;font-weight:700;">場景 A</span>
+            <h4 style="color:#1a5276;font-size:.98rem;">反覆腹痛、腸躁症患者，腸鏡正常，焦慮是根源</h4>
+          </div>
+          <div style="background:#f8f9fa;border-radius:8px;padding:16px;font-size:.87rem;line-height:2.1;border-left:4px solid #e67e22;">
+            <strong style="color:#e67e22;">業代：</strong>「陳醫師，您的腸胃科門診有沒有那種反覆腹痛、腸鏡做完都正常、換了好幾種腸胃藥還是一直回診的患者？」<br><br>
+            <strong style="color:#7f8c8d;">醫師：</strong>「有，這種腸躁症患者很讓人頭痛，藥開了一堆都沒用，有時候懷疑是心理因素但不知道怎麼介入。」<br><br>
+            <strong style="color:#e67e22;">業代：</strong>「這正是心身症的典型表現。焦慮透過自主神經影響腸胃蠕動，腸胃藥治標不治本。有一個多中心試驗顯示，flupenthixol decanoate 用於心身症患者，超過 90% 有治療效益，腹痛緩解率比單純腸胃藥好。Fute 0.5mg 口服是最簡單的切入方式——早上一顆，處方很單純，不需要精神科轉介，您自己就可以開。」<br><br>
+            <strong style="color:#7f8c8d;">醫師：</strong>「我不是精神科，開這個藥合適嗎？」<br><br>
+            <strong style="color:#e67e22;">業代：</strong>「0.5mg 的劑量非常低，適應症包含心身症之焦慮，是正式核准的適應症。這跟您開 domperidone 一樣是標準的門診處方，完全在您的處方範圍內。患者也不需要知道這是精神科藥物，您可以說是『調節神經性腸胃功能的藥』，接受度很高。大多數患者兩週內就能感受到焦慮和腹部不適都改善了。」
+          </div>
+        </div>
+
+        <div style="background:#fff;border-radius:10px;padding:22px;box-shadow:0 2px 8px rgba(0,0,0,.07);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+            <span style="background:#e67e22;color:#fff;border-radius:6px;padding:4px 10px;font-size:.78rem;font-weight:700;">場景 B</span>
+            <h4 style="color:#1a5276;font-size:.98rem;">功能性消化不良，合併明顯焦慮情緒</h4>
+          </div>
+          <div style="background:#f8f9fa;border-radius:8px;padding:16px;font-size:.87rem;line-height:2.1;border-left:4px solid #e67e22;">
+            <strong style="color:#e67e22;">業代：</strong>「劉醫師，功能性消化不良的患者，如果評估下來焦慮是主要驅動因素，您目前怎麼處理那個焦慮的部分？」<br><br>
+            <strong style="color:#7f8c8d;">醫師：</strong>「通常就轉診精神科，但患者常常不願意去，說自己不是精神病。」<br><br>
+            <strong style="color:#e67e22;">業代：</strong>「這正是 Fute 0.5mg 讓您不需要轉診的原因。它的適應症涵蓋心身症和焦慮，您在腸胃科門診直接處方，患者不用去精神科——心理阻力大幅降低，依從性更好。效果一到兩週出現，患者焦慮緩解之後，消化症狀通常也跟著改善。而且無成癮性，患者不用擔心依賴，長期治療的疑慮也消除了。」
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── 現場異議處理 ── -->
+      <div class="inner-content" id="script-objhandle">
+
+        <p style="color:var(--muted);font-size:.88rem;margin-bottom:16px;">以下為醫師在拜訪現場最常提出的即時反駁，以及最有效的一句話或兩句話應對方式。</p>
+
+        <div style="display:flex;flex-direction:column;gap:12px;">
+
+          <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.07);">
+            <div style="display:flex;align-items:stretch;">
+              <div style="background:#e74c3c;color:#fff;padding:14px 16px;display:flex;align-items:center;min-width:44px;justify-content:center;font-size:1.3rem;writing-mode:horizontal-tb;">❓</div>
+              <div style="padding:14px 16px;flex:1;">
+                <div style="font-weight:700;color:#c0392b;font-size:.88rem;margin-bottom:6px;">「第一代藥我都不用，EPS 太麻煩。」</div>
+                <div style="background:#eaf4fb;border-radius:6px;padding:10px 12px;font-size:.86rem;border-left:3px solid #2e86c1;">
+                  「李醫師，flupenthixol 的 EPS 在 12 個月追蹤研究裡，第 3 個月達高峰後就自行下降了，到年底幾乎回基線。低劑量用在焦慮的話 EPS 發生率更低——我建議從焦慮適應症 0.5mg 開始體驗看看，感受一下它的 EPS 跟您印象中的第一代差很多。」
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.07);">
+            <div style="display:flex;align-items:stretch;">
+              <div style="background:#e74c3c;color:#fff;padding:14px 16px;display:flex;align-items:center;min-width:44px;justify-content:center;font-size:1.3rem;">❓</div>
+              <div style="padding:14px 16px;flex:1;">
+                <div style="font-weight:700;color:#c0392b;font-size:.88rem;margin-bottom:6px;">「我已經習慣用 quetiapine 低劑量處理焦慮了。」</div>
+                <div style="background:#eaf4fb;border-radius:6px;padding:10px 12px;font-size:.86rem;border-left:3px solid #2e86c1;">
+                  「Quetiapine 低劑量的主要問題是鎮靜太強，白天功能受影響，而且代謝副作用累積；Fute 0.5mg 是輕微激活、不鎮靜，患者白天活動力完全不受影響。兩個用途相近但體感差很多——您可以選一兩個需要日間保持清醒的患者試試 Fute，比較看看反應。」
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.07);">
+            <div style="display:flex;align-items:stretch;">
+              <div style="background:#e74c3c;color:#fff;padding:14px 16px;display:flex;align-items:center;min-width:44px;justify-content:center;font-size:1.3rem;">❓</div>
+              <div style="padding:14px 16px;flex:1;">
+                <div style="font-weight:700;color:#c0392b;font-size:.88rem;margin-bottom:6px;">「我不確定東竹這家台灣廠商的品質。」</div>
+                <div style="background:#eaf4fb;border-radius:6px;padding:10px 12px;font-size:.86rem;border-left:3px solid #2e86c1;">
+                  「Fute 的有效成分 flupenthixol 是 Lundbeck 1965 年的原創成分，全球已超過 60 年臨床使用紀錄，安全性資料非常完整。東竹藥品持有衛署藥製字許可證，由明德製藥依 GMP 標準製造，與其他國內學名藥廠的規格相同。成分本身的實證，不因製造商不同而改變。」
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.07);">
+            <div style="display:flex;align-items:stretch;">
+              <div style="background:#e74c3c;color:#fff;padding:14px 16px;display:flex;align-items:center;min-width:44px;justify-content:center;font-size:1.3rem;">❓</div>
+              <div style="padding:14px 16px;flex:1;">
+                <div style="font-weight:700;color:#c0392b;font-size:.88rem;margin-bottom:6px;">「高泌乳素血症的問題呢？女性患者我擔心。」</div>
+                <div style="background:#eaf4fb;border-radius:6px;padding:10px 12px;font-size:.86rem;border-left:3px solid #2e86c1;">
+                  「這確實是 D2 阻斷的藥物都要注意的問題。0.5mg 低劑量下泌乳素升高通常很輕微，臨床上在焦慮適應症下少見有症狀的案例。5mg 用於精神病時，若患者有月經不規則或溢乳，可以定期監測泌乳素，必要時降劑量或考慮換藥。提前告知患者、定期追蹤，這個問題是可以管控的。」
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.07);">
+            <div style="display:flex;align-items:stretch;">
+              <div style="background:#e74c3c;color:#fff;padding:14px 16px;display:flex;align-items:center;min-width:44px;justify-content:center;font-size:1.3rem;">❓</div>
+              <div style="padding:14px 16px;flex:1;">
+                <div style="font-weight:700;color:#c0392b;font-size:.88rem;margin-bottom:6px;">「現在已經有很多新藥，為什麼要回頭用舊藥？」</div>
+                <div style="background:#eaf4fb;border-radius:6px;padding:10px 12px;font-size:.86rem;border-left:3px solid #2e86c1;">
+                  「新藥代表更多選擇，不代表舊藥失效。Flupenthixol 的 D1 拮抗活性是目前任何新藥都沒有複製到的特點；它的代謝副作用比很多新藥還低；depot 製劑也是解決依從性最成熟的方案之一。在特定臨床情境下，它的性價比是新藥無法取代的。臨床選藥是配對，不是新舊競爭。」
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.07);">
+            <div style="display:flex;align-items:stretch;">
+              <div style="background:#e74c3c;color:#fff;padding:14px 16px;display:flex;align-items:center;min-width:44px;justify-content:center;font-size:1.3rem;">❓</div>
+              <div style="padding:14px 16px;flex:1;">
+                <div style="font-weight:700;color:#c0392b;font-size:.88rem;margin-bottom:6px;">「我診所這個月剛換了另一家的合約，沒辦法換。」</div>
+                <div style="background:#eaf4fb;border-radius:6px;padding:10px 12px;font-size:.86rem;border-left:3px solid #2e86c1;">
+                  「完全理解。那我今天的目的是讓您對 Fute 有完整認識，等到合約到期或有彈性的時候，您有足夠的資訊去評估。另外，如果您的患者是自費族群，或有特定臨床情境需要 flupenthixol，我們也可以討論個別患者的使用方式，不一定需要全面轉換。」
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 視覺化重點 -->
+  <div class="inner-content" id="promo-visual">
+    <p class="sdesc">可用於簡報或衛教資料的視覺化比較圖表與關鍵數據。</p>
+
+    <h3 style="color:#1a5276;margin-bottom:14px;font-size:1.05rem;">🏆 Fute 優先選擇決策矩陣</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>臨床情境</th><th>優先考慮</th><th>避免</th><th>Fute 優勢</th></tr>
+        <tr><td>慢性焦慮、需長期用藥</td><td style="color:#1abc9c;font-weight:600;">Fute 0.5mg ✅</td><td>BZD</td><td>無成癮、可長期處方</td></tr>
+        <tr><td>憂鬱合併焦慮</td><td style="color:#1abc9c;font-weight:600;">Fute 0.5mg ✅</td><td>BZD（無抗憂鬱）</td><td>雙效、起效較 SSRI 快</td></tr>
+        <tr><td>焦慮患者需日間工作</td><td style="color:#1abc9c;font-weight:600;">Fute 0.5mg ✅</td><td>BZD、Hydroxyzine</td><td>激活效果、不鎮靜</td></tr>
+        <tr><td>老年焦慮、BZD 禁忌</td><td style="color:#1abc9c;font-weight:600;">Fute 0.5mg 低劑量 ✅</td><td>BZD</td><td>無跌倒/認知風險</td></tr>
+        <tr><td>思覺失調症有代謝症候群</td><td style="color:#1abc9c;font-weight:600;">Fute 5mg ✅</td><td>Olanzapine、Quetiapine</td><td>代謝友善</td></tr>
+        <tr><td>思覺失調症陰性症狀為主</td><td style="color:#1abc9c;font-weight:600;">Fute 5mg ✅</td><td>Haloperidol</td><td>D1 最強，不劣於 Risperidone</td></tr>
+        <tr><td>服藥依從性差、反覆復發</td><td style="color:#1abc9c;font-weight:600;">Fute Depot ✅</td><td>口服單方</td><td>2週打一針，消除依從性問題</td></tr>
+        <tr><td>心身症伴焦慮（非精神科）</td><td style="color:#1abc9c;font-weight:600;">Fute 0.5mg ✅</td><td>—</td><td>90%+ 患者有治療效益</td></tr>
+      </table>
+    </div>
+
+    <h3 style="color:#1a5276;margin:22px 0 14px;font-size:1.05rem;">📌 五句話記住 Fute 優勢</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
+      <div style="background:linear-gradient(135deg,#1a5276,#2e86c1);color:#fff;border-radius:10px;padding:18px;text-align:center;">
+        <div style="font-size:1.8rem;margin-bottom:6px;">1️⃣</div>
+        <div style="font-weight:700;font-size:.95rem;margin-bottom:4px;">無成癮</div>
+        <div style="font-size:.8rem;opacity:.85;">可長期處方，不受 BZD 法規限制</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#1abc9c,#16a085);color:#fff;border-radius:10px;padding:18px;text-align:center;">
+        <div style="font-size:1.8rem;margin-bottom:6px;">2️⃣</div>
+        <div style="font-weight:700;font-size:.95rem;margin-bottom:4px;">不鎮靜</div>
+        <div style="font-size:.8rem;opacity:.85;">低劑量激活效果，日間功能不受影響</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#e67e22,#d35400);color:#fff;border-radius:10px;padding:18px;text-align:center;">
+        <div style="font-size:1.8rem;margin-bottom:6px;">3️⃣</div>
+        <div style="font-weight:700;font-size:.95rem;margin-bottom:4px;">雙適應</div>
+        <div style="font-size:.8rem;opacity:.85;">0.5mg 焦慮、5mg 精神病，一藥跨兩症</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#8e44ad,#6c3483);color:#fff;border-radius:10px;padding:18px;text-align:center;">
+        <div style="font-size:1.8rem;margin-bottom:6px;">4️⃣</div>
+        <div style="font-weight:700;font-size:.95rem;margin-bottom:4px;">代謝佳</div>
+        <div style="font-size:.8rem;opacity:.85;">不影響體重血糖，代謝症候群患者首選</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#e74c3c,#c0392b);color:#fff;border-radius:10px;padding:18px;text-align:center;">
+        <div style="font-size:1.8rem;margin-bottom:6px;">5️⃣</div>
+        <div style="font-weight:700;font-size:.95rem;margin-bottom:4px;">有實證</div>
+        <div style="font-size:.8rem;opacity:.85;">RCT 陰性症狀不劣於 Risperidone</div>
+      </div>
+    </div>
+
+    <div style="background:#fff;border-radius:10px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,.07);margin-top:20px;">
+      <h4 style="color:#1a5276;margin-bottom:10px;">📞 一句話推廣金句（依對象）</h4>
+      <div style="display:flex;flex-direction:column;gap:8px;font-size:.88rem;">
+        <div style="padding:10px 14px;background:#eaf4fb;border-radius:8px;border-left:4px solid #2e86c1;"><strong>對精神科醫師：</strong>「Fute 是少數 D1 拮抗最強、代謝副作用最低、又有 depot 選項的第一代抗精神病藥，陰性症狀 RCT 已證明不劣於 risperidone。」</div>
+        <div style="padding:10px 14px;background:#d5f5e3;border-radius:8px;border-left:4px solid #1abc9c;"><strong>對家醫科/內科醫師：</strong>「Fute 0.5mg 是安全取代 BZD 的選擇——無成癮、不鎮靜、有抗憂鬱效果，長期處方完全沒有法規顧慮。」</div>
+        <div style="padding:10px 14px;background:#fef9e7;border-radius:8px;border-left:4px solid #e67e22;"><strong>對患者：</strong>「安平靜早上吃一顆，不會讓你昏昏的，也不會上癮，幫助大腦在壓力下保持平衡。」</div>
+        <div style="padding:10px 14px;background:#f5eef8;border-radius:8px;border-left:4px solid #8e44ad;"><strong>對家屬（depot）：</strong>「兩週打一針，不用每天追著他吃藥，復發機率大幅降低，家屬也輕鬆。」</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════
+     PANEL 10 — 參考文獻
+══════════════════════════════════════ -->
+<div class="panel" id="panel-references">
+  <h2 class="stitle">參考文獻</h2>
+  <p class="sdesc">本平台資料來源均為同儕審查期刊、藥品仿單及臨床指引，共 24 篇。</p>
+  <ul class="ref-list">
+    <li>Lundbeck A/S. Fluanxol (flupenthixol) Product Monograph. Valby, Denmark: H. Lundbeck A/S; 2020.</li>
+    <li>東竹藥品股份有限公司 / 明德製藥. Fute 0.5mg / 5mg 藥品仿單. 衛署藥製字第 049577 號. 核准至 2028-08-05.</li>
+    <li>Leucht S, Cipriani A, Spineli L, et al. Comparative efficacy and tolerability of 15 antipsychotic drugs in schizophrenia. <i>Lancet</i>. 2013;382(9896):951-962.</li>
+    <li>Huhn M, Nikolakopoulou A, Schneider-Thoma J, et al. Relative efficacy and tolerability of 32 oral antipsychotics. <i>Lancet</i>. 2019;394(10202):939-951.</li>
+    <li>Aaes-Jørgensen T, Bjørndal F, Bartels U. Flupenthixol — a review. <i>Br J Psychiatry</i>. 1979;135:46-52.</li>
+    <li>Darcourt G, Donnadieu S, et al. Flupenthixol in anxiety: comparison with lorazepam. <i>Acta Psychiatr Scand Suppl</i>. 1995;391:52-59.</li>
+    <li>Schröder J, Silber C, Soyka M, et al. Efficacy of flupentixol and risperidone in chronic schizophrenia with predominantly negative symptoms. <i>Prog Neuropsychopharmacol Biol Psychiatry</i>. 2007;31(2):77-86. PMID:17412473.</li>
+    <li>Mahapatra J, Quraishi SN, David A, et al. Flupenthixol decanoate (depot) for schizophrenia. <i>Cochrane Database Syst Rev</i>. 2014;(6):CD001470.</li>
+    <li>Joubert J, Milligan S, Jordaan GP. Extrapyramidal side effects in first-episode schizophrenia treated with flupenthixol decanoate. <i>S Afr J Psychiatry</i>. 2021;27:1568. PMC7876946.</li>
+    <li>Montgomery SA, Montgomery DB. Pharmacological prevention of suicidal behaviour. <i>J Affect Disord</i>. 1982;4:291-298.</li>
+    <li>Hasan A, et al. Remission of Suicidal Ideation in EUPD with Flupenthixol. <i>Case Rep Psychiatry</i>. 2022. PMC8776478.</li>
+    <li>NICE. Self-harm: longer-term management. Clinical guideline CG133. 2011. NCBI Bookshelf NBK126780.</li>
+    <li>Efficacy and tolerability of flupenthixol decanoate in depression and psychosomatic disorders: multicenter trial. <i>J Psychiatr Res</i>. 1992. PMID:1496124.</li>
+    <li>Johnstone EC, Crow TJ, Frith CD, et al. Mechanism of the antipsychotic effect. <i>Lancet</i>. 1978;1(8069):848-851.</li>
+    <li>Wikipedia contributors. Flupentixol. <i>Wikipedia</i>. 2024. en.wikipedia.org/wiki/Flupentixol</li>
+    <li>Advances in Psychiatric Treatment. Meet the relatives: typical antipsychotics (Part 2). <i>Cambridge Core</i>. doi:10.1192/apt.bp.</li>
+    <li>藥要看資料庫. 安平靜膜衣錠 0.5 毫克. drugs.olc.tw. 2024.</li>
+    <li>Taylor DM, Barnes TRE, Young AH. The Maudsley Prescribing Guidelines. 14th ed. Wiley-Blackwell; 2021.</li>
+    <li>Stahl SM. Stahl's Essential Psychopharmacology: Prescriber's Guide. 7th ed. Cambridge University Press; 2020.</li>
+    <li>Correll CU, Leucht S, Kane JM. Lower risk for tardive dyskinesia with second-generation antipsychotics. <i>Am J Psychiatry</i>. 2004;161(3):414-425.</li>
+    <li>Strawn JR, Keck PE, Caroff SN. Neuroleptic malignant syndrome. <i>J Clin Psychiatry</i>. 2007;68(5):736-743.</li>
+    <li>Barnes TR. A rating scale for drug-induced akathisia. <i>Br J Psychiatry</i>. 1989;154:672-676.</li>
+    <li>Falkai P, Wobrock T, et al. WFSBP Guidelines for Biological Treatment of Schizophrenia. <i>World J Biol Psychiatry</i>. 2005;6(3):132-191.</li>
+    <li>CTRI/2022/11/047050. Placida® vs escitalopram+clonazepam Phase IV trial. ijclinicaltrials.com/article/view/740. 2022.</li>
+  </ul>
+</div>
+
+<footer>
+  <strong>Fute (Flupenthixol) 安平靜 — 醫療推廣學習平台</strong><br>
+  東竹藥品工業股份有限公司 | 本平台僅供醫療專業人員教育學習使用<br>
+  所有醫療決策應依個別患者狀況，由具資格醫療專業人員判斷 | 資料更新：2026 年 6 月
+</footer>
+
+<script>
+// ══ PANEL SWITCHING ══
+function showPanel(id, btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ══ INNER TABS ══
+function switchInner(id, panelId, btn){
+  const panel = document.getElementById('panel-'+panelId);
+  panel.querySelectorAll('.inner-content').forEach(c=>c.classList.remove('active'));
+  panel.querySelectorAll('.inner-tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+// ══ NESTED TABS（巢狀子頁籤，直接以容器 ID 定位）══
+function switchNested(contentId, containerId, btn){
+  const wrap = document.getElementById(containerId);
+  wrap.querySelectorAll('.inner-content').forEach(c=>c.classList.remove('active'));
+  wrap.parentElement.querySelectorAll('.inner-tab-btn[data-nest="'+containerId+'"]').forEach(b=>b.classList.remove('active'));
+  document.getElementById(contentId).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ══ Q&A DATA ══
+const qaData = [
+  {cat:'basic',q:'Flupenthixol 屬於哪一類抗精神病藥物？',
+   a:'<b>Thioxanthene（硫雜蒽）類</b>第一代抗精神病藥，1965 年由丹麥 Lundbeck 合成。主要作用：多巴胺 D1/D2 受體拮抗，D1 親和力（Ki=3.5nM）為同類藥物中最強。另具 5-HT₂A、α₁、H₁ 受體拮抗活性。',
+   ref:'Wikipedia Flupentixol 2024; Stahl SM. Essential Psychopharmacology. 7th ed.'},
+  {cat:'basic',q:'Fute 0.5mg 和 5mg 的主要藥理差異是什麼？',
+   a:'<b>劑量依賴雙相效應（biphasic effect）：</b><br>• <b>低劑量（0.5mg）：</b>作用突觸前 D2 自體受體，增加多巴胺傳導 → 激活/抗憂鬱效果<br>• <b>高劑量（5mg）：</b>突觸後 D2 阻斷主導 → 抗精神病效果<br>此機轉解釋為何同一藥物低劑量治焦慮、高劑量治精神病。',
+   ref:'Aaes-Jørgensen T et al. Br J Psychiatry. 1979; Lundbeck Product Monograph'},
+  {cat:'basic',q:'Flupenthixol 的半衰期與 D1 受體特性？',
+   a:'<b>半衰期：</b>口服約 35 小時，depot 約 17 天；達穩態需 5–7 天。<br><b>D1 特性：</b>Ki = 3.5 nM，為所有舊型抗精神病藥中 D1 拮抗活性最強。D2 Ki = 0.35 nM（最強）。治療劑量下 D2 佔用 50–70%，D1 佔用約 20%。',
+   ref:'Cambridge Core: Typical antipsychotics Part 2; Wikipedia; Lundbeck Monograph'},
+  {cat:'basic',q:'Flupenthixol 是否在美國核准？',
+   a:'<b>否，flupenthixol 未獲 FDA 核准在美國使用。</b><br>目前核准國家包括：台灣✅、英國✅、澳洲✅、加拿大✅、德國✅、南非✅、伊朗✅等。台灣由東竹藥品申請，許可證字號：衛署藥製字第 049577 號。',
+   ref:'Wikipedia Flupentixol 2024; 藥要看資料庫'},
+  {cat:'dosing',q:'Fute 0.5mg 治療焦慮症的標準起始劑量？',
+   a:'1. <b>第 1 週：</b>早晨 0.5mg<br>2. <b>效果不足：</b>增至 1mg/day（早晨單次 or 早/中各 0.5mg）<br>3. <b>維持：</b>0.5–1mg/day<br>4. <b>最大：</b>3mg/day<br><br><b>服藥時機：早晨或上午</b>，避免下午 3 點後（激活效果可能影響入睡）。老年從 0.25mg 開始。',
+   ref:'Fute 仿單; Taylor DM et al. Maudsley Guidelines. 2021'},
+  {cat:'dosing',q:'Fute 5mg 治療精神分裂症的劑量如何調整？',
+   a:'<b>急性期：</b>5–15mg/day 分 2–3 次<br><b>調整：</b>每 3–5 天依反應增加 5mg<br><b>維持：</b>5–20mg/day<br><b>難治：</b>最高 40mg/day<br><br>服藥依從性差者考慮 depot 轉換：初次 depot 後口服重疊 1–2 週。',
+   ref:'WFSBP Guidelines 2005; Maudsley Guidelines 2021'},
+  {cat:'dosing',q:'患者服藥後失眠應如何處理？',
+   a:'低劑量 flupenthixol 的激活作用導致失眠是<b>服藥時機問題，非需停藥</b>。<br>1. <b>最重要：改為早晨服用</b><br>2. 若分次給藥，全部移至上午<br>3. 仍有困難：短期加低劑量鎮靜劑（過渡）<br>4. 排除其他原因（焦慮惡化、咖啡因、睡眠衛生）',
+   ref:'仿單;臨床實務'},
+  {cat:'safety',q:'靜坐不能 (Akathisia) 如何識別與處置？',
+   a:'<b>識別：</b>主觀坐立難安、無法靜止，可用 Barnes Akathisia Scale (BARS) 評估。<br><b>處置：</b><br>1. 降低 flupenthixol 劑量（最有效）<br>2. Propranolol 10–40mg/day（β-blocker）<br>3. Biperiden/Benztropine（合併其他 EPS）<br>4. Lorazepam 短期（嚴重不適）<br><br>注意與焦慮鑑別，避免誤增劑量。',
+   ref:'Barnes TR. Br J Psychiatry. 1989;154:672-676'},
+  {cat:'safety',q:'EPS 的發生時程？12 個月前瞻性研究數據？',
+   a:'南非首發思覺失調症研究（N=130，flupenthixol decanoate）：<br>• 靜坐不能 <b>15%</b>（初期常見）<br>• 帕金森氏症候 <b>13%</b>（第 3 個月高峰後下降）<br>• 肌張力異常 <b>7%</b>（高劑量相關）<br>• 運動障礙 <b>6%</b><br><br><b>關鍵：整體 ESRS 第 3 個月達高峰，之後逐漸下降至近基線，整體耐受性良好。</b>',
+   ref:'Joubert J et al. S Afr J Psychiatry. 2021;27:1568. PMC7876946'},
+  {cat:'safety',q:'惡性症候群 (NMS) 的早期徵象與處置？',
+   a:'<b>四大核心（口訣 FARM）：</b><br>• <b>F</b>ever 高熱 &gt;38°C<br>• <b>A</b>utonomic instability 自主神經不穩<br>• <b>R</b>igidity 肌肉僵硬<br>• <b>M</b>ental status change 意識改變<br><br><b>實驗室：</b>CPK 顯著上升（×10）、白血球增加<br><b>處置：</b>立即停藥、補液降溫、急診；考慮 dantrolene / bromocriptine<br>死亡率：未處理可達 5–20%',
+   ref:'Strawn JR et al. J Clin Psychiatry. 2007;68(5):736-743'},
+  {cat:'safety',q:'哪些情況下需要監測 QTc？',
+   a:'高風險情況（建議基線心電圖）：<br>• 心臟病史或危險因子<br>• 合用其他 QTc 延長藥（quinolones、amiodarone、TCA）<br>• 低血鉀/鎂（厭食症患者）<br>• 先天性 long QT syndrome 家族史<br>• 老年患者高劑量<br><br>警戒值：QTc &gt;450ms（男）/&gt;470ms（女）謹慎；&gt;500ms 停藥。',
+   ref:'Taylor DM et al. Maudsley Guidelines. 2021'},
+  {cat:'safety',q:'長期使用的遲發性運動障礙 (TD) 風險？',
+   a:'第一代抗精神病藥 TD 年發生率約 5%（第二代 ~1%）。<br><b>危險因子：</b>高劑量、長期使用、老年、女性、EPS 病史<br><b>預防：</b>最低有效劑量 + 定期 AIMS 評估<br><b>出現 TD：</b>降劑量或換非典型藥；VMAT2 抑制劑（valbenazine、deutetrabenazine）可治療',
+   ref:'Correll CU et al. Am J Psychiatry. 2004;161(3):414-425'},
+  {cat:'clinical',q:'患者同時有焦慮和輕度憂鬱，Fute 0.5mg 是否適合？',
+   a:'<b>非常適合。</b>混合焦慮-憂鬱是 flupenthixol 0.5mg 的核心適應症。<br>優點：<br>• 兩者兼顧，單藥治療<br>• 起效比 SSRI 快（約 1–2 週）<br>• 無成癮性<br>• 輕度激活改善憂鬱動力不足<br><br>若憂鬱核心症狀顯著（&gt;2 週、功能損害），考慮合用 SSRI，flupenthixol 可作輔助。',
+   ref:'Darcourt G et al. Acta Psychiatr Scand Suppl. 1995;391:52-59'},
+  {cat:'clinical',q:'Flupenthixol 對 BPD 自傷行為有效嗎？',
+   a:'<b>有初步證據，但整體研究基礎薄弱：</b><br>• 小型 RCT (N=37)：vs 安慰劑，顯著降低重複自傷（RR 0.29, CI 0.1–0.81）<br>• 案例報告（2022）：depot 20mg/2週後自殺意念完全緩解<br>• 開放性試驗：3mg/day 8 週，衝動性顯著改善<br><br>目前無 BPD 核准適應症，屬 off-label；需知情同意。',
+   ref:'Montgomery SA. 1979; PMC8776478; NCBI NBK126780'},
+  {cat:'clinical',q:'精神分裂症患者依從性差，有何替代策略？',
+   a:'<b>Flupenthixol Decanoate（長效注射）是最有效解決方案：</b><br>• 每 2–4 週肌肉注射<br>• 消除口服依從性問題<br>• 早期發現復發<br><br>轉換步驟：口服確認耐受 → 計算等效 depot 劑量 → depot 後口服重疊 1–2 週 → 定期追蹤<br><br>Cochrane 回顧：depot 復發率與其他 depot 相當。',
+   ref:'Mahapatra J et al. Cochrane 2014 CD001470'},
+  {cat:'comparison',q:'Flupenthixol vs Risperidone RCT 主要結論？',
+   a:'兩個隨機雙盲多中心試驗（N=153 及 N=144，24–25 週）：<br>1. 陰性症狀改善：<b>flupenthixol 不劣於 risperidone</b>（週 8/16/24）<br>2. 陽性症狀：兩組相當<br>3. 憂鬱情緒：效果量傾向 flupenthixol<br>4. 主觀生活品質：flupenthixol 在「應對壓力」「放鬆感」「成就感」顯著優於<br>5. 體重/代謝：flupenthixol 影響較少<br>6. 費用：flupenthixol 更低',
+   ref:'Schröder J et al. Prog Neuropsychopharmacol. 2007;31:77-86 | PMID:14509050'},
+  {cat:'comparison',q:'Flupenthixol vs Haloperidol 主要差異？',
+   a:'<table style="font-size:.84rem;width:100%;border-collapse:collapse"><tr><th style="background:#1a5276;color:#fff;padding:5px">特性</th><th style="background:#1a5276;color:#fff;padding:5px">Flupenthixol</th><th style="background:#1a5276;color:#fff;padding:5px">Haloperidol</th></tr><tr><td style="padding:5px;border-bottom:1px solid #eee">D1 受體拮抗</td><td style="padding:5px;border-bottom:1px solid #eee">顯著（同類最強）</td><td style="padding:5px;border-bottom:1px solid #eee">弱</td></tr><tr><td style="padding:5px;border-bottom:1px solid #eee">陰性症狀</td><td style="padding:5px;border-bottom:1px solid #eee">輕度改善</td><td style="padding:5px;border-bottom:1px solid #eee">無明顯效果</td></tr><tr><td style="padding:5px;border-bottom:1px solid #eee">激活/抗憂鬱</td><td style="padding:5px;border-bottom:1px solid #eee">有（低劑量）</td><td style="padding:5px;border-bottom:1px solid #eee">無</td></tr><tr><td style="padding:5px">低劑量焦慮適應症</td><td style="padding:5px">✅ 有</td><td style="padding:5px">❌ 無</td></tr></table>',
+   ref:'Leucht S et al. Lancet. 2013'},
+  {cat:'comparison',q:'為什麼 Fute 0.5mg 比 Benzodiazepines 更適合長期焦慮？',
+   a:'BZD 長期問題：依賴/成癮、顯著戒斷症狀、認知損傷（記憶/注意力）、老年跌倒、法規限制長期開立。<br><br>Flupenthixol 0.5mg 優勢：<br>• 無成癮性，可長期使用<br>• 不影響認知<br>• 輕度激活（不過度鎮靜）<br>• 同時改善憂鬱<br><br>適合：慢性焦慮、BZD 減量過渡期、不願服 SSRI 患者。',
+   ref:'Darcourt G 1995; WHO Model Formulary 2010'},
+  {cat:'special',q:'老年患者使用 Fute 需注意什麼？',
+   a:'1. <b>劑量：</b>從半量開始（0.25mg / 2.5mg）<br>2. <b>跌倒：</b>α₁ 拮抗引起姿勢性低血壓，評估跌倒風險<br>3. <b>認知：</b>可能加重認知下降，定期評估<br>4. <b>失智症：</b>FDA 黑框警告，死亡率增加，非第一線<br>5. <b>QTc：</b>基線心電圖建議<br>6. <b>代謝：</b>肝腎功能隨年齡可能下降，監測',
+   ref:'Taylor DM et al. Maudsley Guidelines. 2021'},
+  {cat:'special',q:'妊娠婦女可以使用嗎？',
+   a:'<b>FDA 分類：C 類，謹慎使用，評估風險效益比。</b><br><br>已知風險：孕晚期新生兒可能出現 EPS 或戒斷症狀（通常短暫）。<br><br>決策原則：<br>• 精神分裂症嚴重 → 不治療風險 &gt; 藥物風險，可繼續<br>• 輕中度焦慮 → 優先 CBT 等非藥物<br>• 新生兒出生後監測 24–72 小時<br><br>哺乳：乳汁/血漿比約 1.3，建議停止哺乳。',
+   ref:'Fute 仿單; Briggs GG et al. Drugs in Pregnancy. 2022'},
+  {cat:'special',q:'CYP2D6 基因型對 flupenthixol 的影響？',
+   a:'Flupenthixol 主要由 <b>CYP2D6</b> 代謝：<br>• <b>Poor Metabolizer (PM)：</b>亞洲人 ~1–2%，藥物蓄積，標準劑量副作用↑<br>• <b>Ultra-rapid Metabolizer (UM)：</b>藥物快速代謝，療效可能不足<br><br>CYP2D6 <b>抑制劑</b>（fluoxetine、paroxetine）可使血中濃度顯著上升 → 監測副作用，考慮降劑量。',
+   ref:'PharmGKB Database; Stahl SM. 2020'},
+  {cat:'basic',q:'Flupenthixol 是否對陰性症狀有效？機轉為何？',
+   a:'<b>有效，且優於 haloperidol，頭對頭 RCT 不劣於 risperidone。</b><br><br>機轉：<br>1. D1 受體拮抗活性為同類最強（Ki=3.5nM），改善前額葉功能不足<br>2. 低鎮靜程度維持較好日間功能（不加重繼發性陰性症狀）<br>3. 不顯著引起 EPS 相關的「藥物誘發性陰性症狀」',
+   ref:'Schröder J et al. 2007; Cambridge Core antipsychotics Part 2'},
+  {cat:'clinical',q:'心身症患者使用 flupenthixol 的臨床證據？',
+   a:'多中心試驗（flupenthixol decanoate，一般科心身症患者）：<br>• 慢性疼痛完全緩解：25%<br>• 心身症完全緩解：29%<br>• 憂鬱焦慮完全緩解：27%<br>• 超過 <b>90%</b> 患者有治療效益<br>• EPS 缺乏或極輕微，無體重顯著變化，無嚴重藥物相關不良事件',
+   ref:'Efficacy and tolerability of flupenthixol decanoate in psychosomatic disorders. J Psychiatr Res. 1992. PMID:1496124'}
+];
+
+let currentCat='all';
+function renderQA(data){
+  const list=document.getElementById('qaList');
+  list.innerHTML='';
+  if(!data.length){list.innerHTML='<div style="text-align:center;color:var(--muted);padding:30px;">找不到相關問題</div>';return;}
+  data.forEach(item=>{
+    const d=document.createElement('div');
+    d.className='qa-item';
+    d.innerHTML=`<div class="qa-question" onclick="toggleQA(this)"><span>${item.q}</span><span class="qa-arrow">▼</span></div><div class="qa-answer">${item.a}<div class="ref" style="margin-top:8px;">📚 ${item.ref}</div></div>`;
+    list.appendChild(d);
+  });
+}
+function toggleQA(el){
+  const item=el.parentElement;
+  item.classList.toggle('open');
+  item.querySelector('.qa-answer').classList.toggle('show');
+}
+function filterCategory(cat,btn){
+  currentCat=cat;
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+function filterQA(){applyFilters();}
+function applyFilters(){
+  const s=document.getElementById('qaSearch').value.toLowerCase();
+  let data=qaData;
+  if(currentCat!=='all')data=data.filter(d=>d.cat===currentCat);
+  if(s)data=data.filter(d=>d.q.toLowerCase().includes(s)||d.a.toLowerCase().includes(s));
+  renderQA(data);
+}
+renderQA(qaData);
+
+// ══ QUIZ ══
+const quizData=[
+  {q:'Fute 0.5mg 的建議服藥時間？',opts:['睡前服用','早晨或上午服用','隨三餐分次','空腹效果最佳'],ans:1,exp:'低劑量具激活效果，建議早晨服用，避免下午 3 點後給藥以防入睡困難。'},
+  {q:'Flupenthixol D2 受體 Ki 值（cis-isomer）？',opts:['35 nM','7 nM','3.5 nM','0.35 nM'],ans:3,exp:'D2 Ki = 0.35 nM（最強）；D1 Ki = 3.5 nM；H₁ Ki = 0.86 nM；5-HT₂A Ki ≈ 7 nM。'},
+  {q:'Flupenthixol 屬於哪一類抗精神病藥？',opts:['Phenothiazine 類','Butyrophenone 類','Thioxanthene 類','Benzisoxazole 類'],ans:2,exp:'Thioxanthene（硫雜蒽）類，1965 年由 Lundbeck 合成，結構與 phenothiazine 相似但骨架不同。'},
+  {q:'低劑量 flupenthixol 抗憂鬱的主要機轉？',opts:['強力 D2 後突觸阻斷','突觸前 D2 自體受體拮抗→多巴胺傳導↑','5-HT 再回收抑制','GABA 增強'],ans:1,exp:'低劑量作用突觸前 D2 自體受體，抑制多巴胺回饋，導致多巴胺傳導增加，產生激活/抗憂鬱效果。'},
+  {q:'高熱＋肌肉僵硬＋意識改變，最可能是？',opts:['嚴重 EPS','惡性症候群 (NMS)','過敏反應','高泌乳素血症'],ans:1,exp:'NMS 三聯症：高熱＋僵硬＋意識改變。需立即停藥、急診處置，死亡率未處理可達 5–20%。'},
+  {q:'Flupenthixol vs Risperidone RCT（N=153）對陰性症狀的結論？',opts:['Flupenthixol 顯著優於 Risperidone','Flupenthixol 不劣於 Risperidone','Risperidone 顯著優於 Flupenthixol','兩組無任何差異'],ans:1,exp:'非劣性（non-inferiority）成立，週 8/16/24 均確認。主觀生活品質方面 flupenthixol 更優。'},
+  {q:'Flupenthixol 主要代謝酵素？',opts:['CYP3A4','CYP1A2','CYP2D6','CYP2C19'],ans:2,exp:'CYP2D6。Fluoxetine、paroxetine 等 CYP2D6 抑制劑可使其血中濃度顯著上升。'},
+  {q:'Fute 5mg 治療精神分裂症的一般維持劑量？',opts:['0.5–1mg/day','1–5mg/day','5–20mg/day','40–60mg/day'],ans:2,exp:'維持期 5–20mg/day；難治案例最高 40mg/day，需密切監測副作用。'},
+  {q:'首發思覺失調症研究（N=130）中，EPS 何時達高峰？',opts:['第 1 個月','第 3 個月','第 6 個月','第 12 個月'],ans:1,exp:'整體 ESRS 分數於第 3 個月達高峰後逐漸下降，至第 12 個月時接近基線，整體耐受性良好。'},
+  {q:'靜坐不能 (Akathisia) 第一線處置？',opts:['立即停藥','降低 flupenthixol 劑量','加用 risperidone','給予 SSRI'],ans:1,exp:'降低抗精神病藥劑量最有效。若症狀持續，可加 propranolol (β-blocker) 或短期 benzodiazepine。'}
+];
+let curQ=0,score=0,answered=false;
+function renderQuiz(){
+  const c=document.getElementById('quizContainer');
+  if(curQ>=quizData.length){
+    c.innerHTML=`<div class="quiz-card" style="text-align:center"><div style="font-size:1.5rem;font-weight:700;color:var(--primary);margin-bottom:8px;">🎉 測驗完成！</div><div style="font-size:1.2rem;margin-bottom:8px;">得分：${score} / ${quizData.length}</div><div style="color:var(--muted);margin-bottom:18px;">${score>=8?'優秀！掌握度很高 🏆':'繼續努力，多複習 Q&A 區域 📖'}</div><button class="btn btn-primary" onclick="restartQuiz()">重新測驗</button></div>`;
+    return;
+  }
+  const q=quizData[curQ];
+  c.innerHTML=`<div class="quiz-card"><div style="color:var(--muted);font-size:.83rem;margin-bottom:7px;">第 ${curQ+1} 題 / 共 ${quizData.length} 題</div><div class="progress-bar"><div class="progress-fill" style="width:${(curQ/quizData.length)*100}%"></div></div><p style="font-weight:600;margin:13px 0 8px;font-size:.97rem;">${q.q}</p><div class="quiz-options">${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answerQuiz(${i},this)">${String.fromCharCode(65+i)}. ${o}</button>`).join('')}</div><div class="quiz-exp" id="qExp"><div class="info-box">${q.exp}</div></div><div style="margin-top:10px;"><button class="btn btn-primary" id="nextBtn" onclick="nextQ()" style="display:none">下一題 →</button></div></div>`;
+}
+function answerQuiz(idx,btn){
+  if(answered)return;
+  answered=true;
+  const q=quizData[curQ];
+  document.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);
+  if(idx===q.ans){btn.classList.add('correct');score++;}
+  else{btn.classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct');}
+  document.getElementById('qExp').classList.add('show');
+  document.getElementById('nextBtn').style.display='inline-block';
+}
+function nextQ(){curQ++;answered=false;renderQuiz();}
+function restartQuiz(){curQ=0;score=0;answered=false;renderQuiz();}
+renderQuiz();
+</script>
+</body>
+</html>
